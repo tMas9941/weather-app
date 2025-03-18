@@ -1,12 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { WEATHER_API_KEY } from "./constants/keys.js";
-import List from "./components/city/List.jsx";
+
+// Pages
+import Home from "./pages/Home.jsx";
+import City from "./pages/City.jsx";
 
 function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<List />} />
+				<Route path="/" element={<Home />} />
+				<Route path="/city/:id" element={<City />} />
 			</Routes>
 		</Router>
 	);

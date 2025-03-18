@@ -7,7 +7,7 @@ export default function List() {
 	return (
 		<div>
 			{cities.map((city) => (
-				<Card />
+				<Card city={city} key={city} />
 			))}
 		</div>
 	);
