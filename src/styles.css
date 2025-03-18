@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+:root {
+	--text: #01111c;
+	--background: #f9fcff;
+	--primary: #0c8ff4;
+	--secondary: #f97a86;
+	--accent: #52aef1;
+}
+
+@theme inline {
+	--color-*: initial;
+	--color-tailwind: oklch(0.746 0.16 232.661);
+	--color-white: hsl(0, 0%, 100%);
+	--color-text: var(--text);
+	--color-background: var(--background);
+	--color-primary: var(--primary);
+	--color-secondary: var(--secondary);
+	--color-accent: var(--accent);
+}
