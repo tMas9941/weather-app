@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import CitiesContext from "../../contexts/CitiesContext";
 import Card from "./Card";
 
-const cities = ["Miskolc", "Budapest"];
-
 export default function List() {
+	const { cities } = useContext(CitiesContext);
+	console.log("LIST render ", cities);
 	return (
-		<div>
+		<div className="flex flex-col gap-1">
 			{cities.map((city) => (
 				<Card city={city} key={city} />
 			))}
