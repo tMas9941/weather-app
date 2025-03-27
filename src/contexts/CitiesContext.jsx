@@ -1,17 +1,36 @@
 import React, { createContext, useState } from "react";
+import { getCookie, setCookie } from "../utils/cookieHandler";
 const CitiesContext = createContext();
 
-// let cities = ["Miskolc"];
+let selectedCity = { name: getCookie("currentCity"), deselect: null };
+console.log("selectedCity  ", selectedCity);
+
+function cahngeSelectedCity(newCity, funcDeselect) {}
 
 export function CitiesProvider({ children }) {
-	const [cities, setCities] = useState(["Miskolc", "Texas"]);
+	const [cities, setCities] = useState([
+		"Miskolc",
+		"Texas",
+		"New York",
+		// "Beijing",
+		// "Tokyo",
+		// "Brasilia",
+		// "Mexico City",
+		// "Cape Town",
+		// "Paris",
+		// "Berlin",
+		// "Moskva",
+		// "Prague",
+		// "Wein",
+		// "Rome",
+		// "Norilsk",
+		// "Igarka",
+	]);
 
-	// const setCities = (newCities) => (cities = newCities);
 	return (
-		// <CitiesContext.Provider value={useMemo(() => ({ cities, setCities }), [cities, setCities])}>
-		// 	{children}
-		// </CitiesContext.Provider>
-		<CitiesContext.Provider value={{ cities, setCities }}>{children}</CitiesContext.Provider>
+		<CitiesContext.Provider value={{ cities, setCities, selectedCity, cahngeSelectedCity }}>
+			{children}
+		</CitiesContext.Provider>
 	);
 }
 

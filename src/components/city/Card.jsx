@@ -1,26 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import useCityWeather from "../../hooks/useCityWeather";
+import getWeatherGradient from "../../utils/getWeatherGradient";
 
-const colorSchemes = [
-	{ clear: "bg-linear-to-r from-blue-400 to-stone-900 " },
-	{ clear: "bg-linear-to-r from-blue-200 to-amber-200 " },
-];
+import { getCookie } from "../../utils/cookieHandler";
+
+let deselectFunc = null;
+const initSelected = getCookie("currentCity");
 
 export default function Card({ city }) {
-	console.log("render city  ", city);
 	const data = useCityWeather(city);
-	// const data = null;
+	const [selected, setSelected] = useState(getInitialValue);
+
+	function getInitialValue() {
+		if (initSelected === city) {
+			deselectFunc = [() => setSelected(false)];
+			return true;
+		}
+		return false;
+	}
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		setSelected(true);
+		if (deselectFunc && !selected) deselectFunc[0]();
+		deselectFunc = [() => setSelected(false)];
+	};
 
 	if (!data) return <></>;
-	console.log(data.current.condition.icon);
-	console.log(" data  ", data);
+	console.log("render ", city);
 	return (
 		<div
-			className={`${colorSchemes[data.current.is_day].clear}
-				overflow-hidden relative group py-2 px-4 h-fit w-85
-				cursor-pointer font-semibold ${
-					data.current.is_day ? "text-text" : "text-background"
-				} transition-[padding, opacity] ease-out duration-150`}
+			id={city}
+			className={`${getWeatherGradient(data.current.is_day, data.current.condition.text)} ${
+				selected ? "left-0" : "-left-5"
+			}
+				overflow-hidden relative group py-2 ps-10 pe-2 h-fit w-85  cursor-pointer font-semibold 
+				${data.current.is_day ? "text-text" : "text-background"} transition-[left] ease-out duration-150 
+				hover:ring-2 ring-white`}
+			onClick={handleClick}
 		>
 			<div className="grid grid-cols-3 justify-between">
 				<div className="col-span-2 ">
@@ -40,8 +57,7 @@ export default function Card({ city }) {
 
 			<img
 				src={data.current.condition.icon}
-				className="absolute top-0 -right-13 w-[150px] h-[150px] opacity-70"
-				// style={{ width: 150, height: 150 }}
+				className="absolute -top-7 -right-13 w-[130px] h-[130px] opacity-80"
 			/>
 		</div>
 	);

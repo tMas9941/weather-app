@@ -13,6 +13,7 @@
 	/* --color-*: initial; */
 	--color-tailwind: oklch(0.746 0.16 232.661);
 	--color-white: hsl(0, 0%, 100%);
+	--color-black: hsl(0, 0%, 0%);
 	--color-text: var(--text);
 	--color-background: var(--background);
 	--color-background-sidebar: var(--background-sidebar);
