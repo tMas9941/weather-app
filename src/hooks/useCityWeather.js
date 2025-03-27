@@ -17,5 +17,6 @@ export default function useCityWeather(city) {
 			ready = true;
 		};
 	}, [city]);
+
 	return data;
 }

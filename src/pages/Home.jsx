@@ -14,7 +14,6 @@ export default function Home() {
 				<List />
 			</SideBar>
 			<Details> </Details>
-			<div className="flex flex-col">Részletek</div>
 		</div>
 	);
 }

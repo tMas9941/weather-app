@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useCityWeather from "../../hooks/useCityWeather";
 import getWeatherGradient from "../../utils/getWeatherGradient";
 
 import { getCookie } from "../../utils/cookieHandler";
+import CitiesContext from "../../contexts/CitiesContext";
 
 let deselectFunc = null;
 const initSelected = getCookie("currentCity");
 
 export default function Card({ city }) {
 	const data = useCityWeather(city);
+	const { cahngeSelectedCity } = useContext(CitiesContext);
 	const [selected, setSelected] = useState(getInitialValue);
 
 	function getInitialValue() {
@@ -24,10 +26,11 @@ export default function Card({ city }) {
 		setSelected(true);
 		if (deselectFunc && !selected) deselectFunc[0]();
 		deselectFunc = [() => setSelected(false)];
+		cahngeSelectedCity(city);
 	};
 
 	if (!data) return <></>;
-	console.log("render ", city);
+	console.log("RENDER CARD");
 	return (
 		<div
 			id={city}
