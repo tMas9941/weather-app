@@ -8,7 +8,6 @@ export default function List() {
 	return (
 		<div className="flex flex-col gap-0.5">
 			{cities.map((city) => {
-				console.log(" city   ", city);
 				return <Card city={city} key={city} />;
 			})}
 		</div>

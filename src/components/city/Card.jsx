@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import useCityWeather from "../../hooks/useCityWeather";
-import getWeatherGradient from "../../utils/getWeatherGradient";
+import getWeatherGradient from "../../utils/getWeatherGradient.js";
 
 import { getCookie } from "../../utils/cookieHandler";
 import CitiesContext from "../../contexts/CitiesContext";
@@ -9,8 +9,8 @@ let deselectFunc = null;
 const initSelected = getCookie("currentCity");
 
 export default function Card({ city }) {
-	const data = useCityWeather(city);
 	const { cahngeSelectedCity } = useContext(CitiesContext);
+	const data = useCityWeather(city);
 	const [selected, setSelected] = useState(getInitialValue);
 
 	function getInitialValue() {
@@ -30,13 +30,13 @@ export default function Card({ city }) {
 	};
 
 	if (!data) return <></>;
-	console.log("RENDER CARD");
+	const color = getWeatherGradient(data.current.is_day, data.current.condition.text);
+	console.log("color  ", color);
+	console.log("RENDER CARD ", data.current.is_day, data.current.condition.text);
 	return (
 		<div
 			id={city}
-			className={`${getWeatherGradient(data.current.is_day, data.current.condition.text)} ${
-				selected ? "left-0" : "-left-5"
-			}
+			className={`${color} ${selected ? " left-0" : " -left-5"}
 				overflow-hidden relative group py-2 ps-10 pe-2 h-fit w-85  cursor-pointer font-semibold 
 				${data.current.is_day ? "text-text" : "text-background"} transition-[left] ease-out duration-150 
 				hover:ring-2 ring-white`}

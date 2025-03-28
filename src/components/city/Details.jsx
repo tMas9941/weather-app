@@ -8,10 +8,11 @@ export default function Details({ children }) {
 	// console.log("details data  ", details)
 	return (
 		<div
-			className={`w-full p-10 ${getWeatherGradient(
+			className={`relative -z-10 w-full h-auto flex flex-col items-center  text-white ${getWeatherGradient(
 				details.current.is_day,
-				details.current.condition.text
-			)} flex flex-col items-center  text-white`}
+				details.current.condition.text,
+				"to-b"
+			)}`}
 		>
 			<div className="flex flex-col gap-3 items-center">
 				<h1 className="text-6xl font-semibold">{details.location.name}</h1>

@@ -1,10 +1,7 @@
-const preloadColorsForTailwind =
-	"to-blue-700 to-cyan-950 to-indigo-800 to-indigo-400 to-gray-700 to-gray-200 to-amber-100 to-cyan-900 to-blue-900 to-blue-400";
-
 export default function getWeatherGradient(is_day, condition, direction = "to-r") {
 	const hasCondition = (array) => array.some((elem) => condition.toLowerCase().includes(elem));
 
-	let tailwindString = `bg-linear-${direction}`;
+	let tailwindString = `bg-linear-${direction} `;
 	if (is_day) {
 		tailwindString += "from-sky-200 ";
 	} else {
@@ -24,5 +21,7 @@ export default function getWeatherGradient(is_day, condition, direction = "to-r"
 	} else if (hasCondition(["ice", "snow", "sleet"])) {
 		tailwindString += `to-indigo-${800 - is_day * 400}`;
 	}
+	console.log("tailwindString  ", tailwindString);
+
 	return tailwindString;
 }

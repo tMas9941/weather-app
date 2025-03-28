@@ -8,7 +8,7 @@ import Details from "../components/city/Details";
 
 export default function Home() {
 	return (
-		<div className="w-full min-h-screen flex flex-row gap-10 bg-lime-900">
+		<div className="relative w-full min-h-screen flex flex-row gap-10 ">
 			<SideBar>
 				<Input />
 				<List />
