@@ -1,10 +1,12 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import useCityWeather from "../../hooks/useCityWeather";
 import getWeatherGradient from "../../utils/getWeatherGradient.js";
-import { cahngeSelectedCity } from "../../global/citiesData.js";
+
 import buttonToggler from "../../utils/buttonToggler.js";
+import CitiesContext from "../../contexts/CitiesContext.jsx";
 
 const Card = memo(function createCard({ city }) {
+	const { cahngeSelectedCity } = useContext(CitiesContext);
 	const data = useCityWeather(city);
 	const [selected, toggleOn] = buttonToggler(city);
 

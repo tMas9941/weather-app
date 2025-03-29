@@ -1,18 +1,14 @@
-import React, { useState } from "react";
-import { citiesList } from "../../global/citiesData";
+import React, { useContext, useState } from "react";
+
 import Card from "./Card";
+import CitiesContext from "../../contexts/CitiesContext";
 
 export default function List() {
-	const [cities, setCities] = useState(setInitialCities());
+	const { citiesList } = useContext(CitiesContext);
 
-	function setInitialCities() {
-		citiesList.addFunction("listComp", (cities) => setCities(cities));
-		return citiesList.value;
-	}
-	const memorizedCard = React.memo(Card);
 	return (
 		<div className="flex flex-col gap-0.5">
-			{cities.map((city) => {
+			{citiesList.map((city) => {
 				return <Card city={city} key={city} />;
 			})}
 		</div>

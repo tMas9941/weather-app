@@ -5,7 +5,7 @@ import getWeatherGradient from "../../utils/getWeatherGradient";
 export default function Details() {
 	const details = useCityDetails();
 	if (!details) return <></>;
-	// console.log("details data  ", details)
+	console.log("details data  ", details);
 	return (
 		<div
 			className={`relative -z-10 w-full h-auto flex flex-col items-center  text-white ${getWeatherGradient(

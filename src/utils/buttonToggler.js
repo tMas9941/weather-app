@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { selectedCity } from "../global/citiesData.js";
+import { useContext, useState } from "react";
+import CitiesContext from "../contexts/CitiesContext";
 
 function unToggle() {}
 
 export default function buttonToggler(city) {
+	const { selectedCity } = useContext(CitiesContext);
 	const [active, setActive] = useState(setInitialValue());
 
 	const toggleOn = () => {
@@ -19,7 +20,7 @@ export default function buttonToggler(city) {
 	}
 
 	function setInitialValue() {
-		if (city === selectedCity.value) {
+		if (city === selectedCity) {
 			unToggle = deactivate;
 			return true;
 		}
