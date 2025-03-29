@@ -3,7 +3,7 @@ import WEATHER_API_KEY from "../constants/keys.js/";
 import { selectedCity } from "../global/citiesData";
 
 export default function useCityDetails() {
-	const [data, setData] = useState(null);
+	const [data, setData] = useState();
 
 	useEffect(() => {
 		selectedCity.addFunction("detailsHook", (cityName) => cityChanged(cityName));

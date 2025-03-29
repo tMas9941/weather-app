@@ -1,31 +1,17 @@
-import { getCookie, setCookie } from "../utils/cookieHandler";
+import { getCookieObj, setCookieObj } from "../utils/cookieHandler";
 import SignaledValue from "../utils/signaledValue.js";
 
-export const selectedCity = new SignaledValue();
+export const citiesData = getCookieObj("weatherApp");
 
-export const cities = [
-	"Miskolc",
-	"Texas",
-	"New York",
-	"Beijing",
-	"Tokyo",
-	"Brasilia",
-	"Mexico City",
-	"Cape Town",
-	"Paris",
-	"Berlin",
-	"Moskva",
-	"Prague",
-	"Wein",
-	"Rome",
-	"Norilsk",
-	"Igarka",
-];
+export const selectedCity = new SignaledValue(citiesData.initialCity);
+export const citiesList = new SignaledValue(citiesData.cities);
 
 export function cahngeSelectedCity(newCity) {
-	// selectedCity = newCity;
 	selectedCity.changeValue(newCity);
-	console.log(selectedCity.value);
-	setCookie("currentCity", newCity);
-	// onChange.details(newCity);
+	// setCookieObj("weatherApp", citiesData);
+	// console.log("cookie  ", getCookieObj("weatherApp"), " selectedCity ", selectedCity);
+}
+export function changeInitialCity(newCity) {
+	citiesData.initialCity = newCity;
+	setCookieObj("weathaerApp", citiesData);
 }

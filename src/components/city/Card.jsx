@@ -1,13 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import useCityWeather from "../../hooks/useCityWeather";
 import getWeatherGradient from "../../utils/getWeatherGradient.js";
 import { cahngeSelectedCity } from "../../global/citiesData.js";
-import { getCookie } from "../../utils/cookieHandler";
 import buttonToggler from "../../utils/buttonToggler.js";
 
-const initSelected = getCookie("currentCity");
-
-export default function Card({ city }) {
+const Card = memo(function createCard({ city }) {
 	const data = useCityWeather(city);
 	const [selected, toggleOn] = buttonToggler(city);
 
@@ -16,9 +13,8 @@ export default function Card({ city }) {
 		toggleOn();
 		cahngeSelectedCity(city);
 	};
-
 	if (!data) return <></>;
-	console.log("RENDER CARD  ", city);
+	console.log("rendder card ", city);
 	return (
 		<div
 			id={city}
@@ -52,4 +48,5 @@ export default function Card({ city }) {
 			/>
 		</div>
 	);
-}
+});
+export default Card;

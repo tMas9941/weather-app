@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import WEATHER_API_KEY from "../constants/keys.js/";
 
 export default function useCityWeather(city) {
-	const [data, setData] = useState(null);
+	const [data, setData] = useState();
 
 	useEffect(() => {
 		let ready = false;
