@@ -1,20 +1,18 @@
 import React, { useContext } from "react";
-import CitiesContext from "../contexts/CitiesContext";
 import capitalize from "../utils/capitalize.js";
 
 export default function Input() {
-	const { cities, setCities } = useContext(CitiesContext);
 	console.log("input render");
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
 		const formProps = Object.fromEntries(new FormData(e.target));
 		console.log("e.target ");
 		const cityName = capitalize(formProps.cityName);
-		if (cityName && !cities.includes(cityName)) {
-			setCities([...cities, cityName]);
-			e.target[0].value = "";
-		}
+		// if (cityName && !cities.includes(cityName)) {
+		// 	setCities([...cities, cityName]);
+		// 	e.target[0].value = "";
+		// }
 	};
 	return (
 		<form onSubmit={handleSubmit} className="h-9 text-white w-full flex px-2">

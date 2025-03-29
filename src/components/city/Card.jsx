@@ -1,42 +1,30 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import useCityWeather from "../../hooks/useCityWeather";
 import getWeatherGradient from "../../utils/getWeatherGradient.js";
-
+import { cahngeSelectedCity } from "../../global/citiesData.js";
 import { getCookie } from "../../utils/cookieHandler";
-import CitiesContext from "../../contexts/CitiesContext";
+import buttonToggler from "../../utils/buttonToggler.js";
 
-let deselectFunc = null;
 const initSelected = getCookie("currentCity");
 
 export default function Card({ city }) {
-	const { cahngeSelectedCity } = useContext(CitiesContext);
 	const data = useCityWeather(city);
-	const [selected, setSelected] = useState(getInitialValue);
-
-	function getInitialValue() {
-		if (initSelected === city) {
-			deselectFunc = [() => setSelected(false)];
-			return true;
-		}
-		return false;
-	}
+	const [selected, toggleOn] = buttonToggler(city);
 
 	const handleClick = (e) => {
 		e.preventDefault();
-		setSelected(true);
-		if (deselectFunc && !selected) deselectFunc[0]();
-		deselectFunc = [() => setSelected(false)];
+		toggleOn();
 		cahngeSelectedCity(city);
 	};
 
 	if (!data) return <></>;
-	const color = getWeatherGradient(data.current.is_day, data.current.condition.text);
-	console.log("color  ", color);
-	console.log("RENDER CARD ", data.current.is_day, data.current.condition.text);
+	console.log("RENDER CARD  ", city);
 	return (
 		<div
 			id={city}
-			className={`${color} ${selected ? " left-0" : " -left-5"}
+			className={`${getWeatherGradient(data.current.is_day, data.current.condition.text)} ${
+				selected ? " left-0" : " -left-5"
+			}
 				overflow-hidden relative group py-2 ps-10 pe-2 h-fit w-85  cursor-pointer font-semibold 
 				${data.current.is_day ? "text-text" : "text-background"} transition-[left] ease-out duration-150 
 				hover:ring-2 ring-white`}

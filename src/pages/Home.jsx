@@ -13,7 +13,7 @@ export default function Home() {
 				<Input />
 				<List />
 			</SideBar>
-			<Details> </Details>
+			<Details />
 		</div>
 	);
 }

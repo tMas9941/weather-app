@@ -21,7 +21,6 @@ export default function getWeatherGradient(is_day, condition, direction = "to-r"
 	} else if (hasCondition(["ice", "snow", "sleet"])) {
 		tailwindString += `to-indigo-${800 - is_day * 400}`;
 	}
-	console.log("tailwindString  ", tailwindString);
 
 	return tailwindString;
 }

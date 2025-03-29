@@ -2,8 +2,8 @@ import React from "react";
 import useCityDetails from "../../hooks/useCityDetails";
 import getWeatherGradient from "../../utils/getWeatherGradient";
 
-export default function Details({ children }) {
-	let details = useCityDetails();
+export default function Details() {
+	const details = useCityDetails();
 	if (!details) return <></>;
 	// console.log("details data  ", details)
 	return (

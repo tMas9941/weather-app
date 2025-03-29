@@ -7,7 +7,6 @@ export default function useCityWeather(city) {
 	useEffect(() => {
 		let ready = false;
 		if (!ready) {
-			console.log("fetch ", city);
 			fetch(`http://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${city}`)
 				.then((response) => (response.ok ? response.json() : null))
 				.then((json) => setData(json));
