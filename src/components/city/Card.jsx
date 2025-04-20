@@ -21,18 +21,18 @@ const Card = memo(function createCard({ city }) {
 			className={`${getWeatherGradient(data.current.is_day, data.current.condition.text)} ${
 				selected ? " left-0" : " -left-5"
 			}
-				overflow-hidden relative group py-2 ps-10 pe-2 h-fit w-85  cursor-pointer font-semibold 
+				overflow-hidden relative group py-2 ps-12  h-fit w-85 me-auto cursor-pointer font-semibold 
 				${data.current.is_day ? "text-text" : "text-background"} transition-[left] ease-out duration-150 
 				hover:ring-2 ring-white`}
 			onClick={handleClick}
 		>
-			<div className="grid grid-cols-3 justify-between">
-				<div className="col-span-2 ">
+			<div className="grid grid-cols-5 justify-between">
+				<div className="col-span-3 ">
 					<h2 className="text-xl font-bold ">{city}</h2>
 					<p> {data.location.country}</p>
 					<p> {data.current.last_updated.split(" ")[1]}</p>
 				</div>
-				<div className="z-10">
+				<div className="z-10 col-span-2 ">
 					<p className={"backdrop-blur-xs w-fit pe-2 rounded-full text-4xl font-semibold"}>
 						{`${data.current.temp_c}°`}
 					</p>

@@ -16,7 +16,7 @@ export default function getWeatherGradient(is_day, condition, direction = "to-r"
 		tailwindString += `to-${is_day ? "amber-100" : "cyan-900"}`;
 	} else if (hasCondition(["clear"])) {
 		tailwindString += "to-cyan-800";
-	} else if (hasCondition(["cloudy", "overcast", "mist"])) {
+	} else if (hasCondition(["cloudy", "overcast", "mist", "fog"])) {
 		tailwindString += `to-gray-${700 - is_day * 500}`;
 	} else if (hasCondition(["ice", "snow", "sleet"])) {
 		tailwindString += `to-indigo-${800 - is_day * 400}`;

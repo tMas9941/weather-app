@@ -9,9 +9,9 @@ export default function List() {
 		citiesList.addFunction("listComp", (cities) => setCities(cities));
 		return citiesList.value;
 	}
-	const memorizedCard = React.memo(Card);
+
 	return (
-		<div className="flex flex-col gap-0.5">
+		<div style={{ direction: "ltr" }} className="flex flex-col gap-0.5">
 			{cities.map((city) => {
 				return <Card city={city} key={city} />;
 			})}

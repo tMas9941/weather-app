@@ -19,12 +19,16 @@ export default function Input() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="h-9 text-white w-full flex px-2">
+		<form
+			style={{ direction: "ltr" }}
+			onSubmit={handleSubmit}
+			className="min-h-12 text-white w-full flex px-2"
+		>
 			<input
 				type="text"
 				name="cityName"
 				placeholder="Add new city..."
-				className="border border-white/30 h-full w-full ps-5 outline-none"
+				className="h-full w-full ps-5 border border-white/30 bg-gray-700/50 text-xl outline-none"
 			/>
 			<button
 				type="submit"

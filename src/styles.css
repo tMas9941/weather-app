@@ -11,3 +11,20 @@
 	--color-black: #000;
 	--color-white: #fff;
 }
+
+@layer base {
+	.direction-left {
+		unicode-bidi: bidi-override;
+		direction: ltr;
+	}
+	.direction-right {
+		unicode-bidi: bidi-override;
+		direction: rtl;
+	}
+
+	.custom-scrollbar {
+		scrollbar-width: thin;
+		scroll-behavior: smooth;
+		scrollbar-color: var(--color-accent) gray;
+	}
+}
