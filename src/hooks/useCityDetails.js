@@ -6,7 +6,7 @@ export default function useCityDetails() {
 	const [data, setData] = useState();
 
 	useEffect(() => {
-		selectedCity.addFunction("detailsHook", (cityName) => cityChanged(cityName));
+		selectedCity.connectFunction("detailsHook", (cityName) => cityChanged(cityName));
 		cityChanged(selectedCity.value);
 	}, []);
 

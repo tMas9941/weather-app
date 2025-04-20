@@ -26,13 +26,14 @@ const Card = memo(function createCard({ city }) {
 				hover:ring-2 ring-white`}
 			onClick={handleClick}
 		>
-			<div className="grid grid-cols-5 justify-between">
+			<div className="grid grid-cols-6 justify-between ">
 				<div className="col-span-3 ">
 					<h2 className="text-xl font-bold ">{city}</h2>
 					<p> {data.location.country}</p>
 					<p> {data.current.last_updated.split(" ")[1]}</p>
 				</div>
-				<div className="z-10 col-span-2 ">
+				<img src="star.svg" className="justify-start z-11 w-10 h-10 start-0 bottom-1 "></img>
+				<div className="col-span-2 z-10">
 					<p className={"backdrop-blur-xs w-fit pe-2 rounded-full text-4xl font-semibold"}>
 						{`${data.current.temp_c}°`}
 					</p>

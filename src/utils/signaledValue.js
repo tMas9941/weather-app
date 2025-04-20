@@ -1,15 +1,15 @@
 export default class SignaledValue {
 	constructor(value) {
 		this.value = value;
-		this.registeredFunctions = {};
+		this.connectedFunctions = {};
 	}
 
-	addFunction(functionName, newFunction) {
-		this.registeredFunctions[functionName] = newFunction;
+	connectFunction(functionName, newFunction) {
+		this.connectedFunctions[functionName] = newFunction;
 	}
 
 	changeValue(newValue) {
 		this.value = newValue;
-		Object.values(this.registeredFunctions).forEach((func) => func(newValue));
+		Object.values(this.connectedFunctions).forEach((func) => func(newValue));
 	}
 }

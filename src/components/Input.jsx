@@ -1,21 +1,13 @@
 import React, { useState } from "react";
 import capitalize from "../utils/capitalize.js";
-import { citiesList } from "../global/citiesData.js";
+import { addCity } from "../global/citiesData.js";
 
 export default function Input() {
-	console.log("input render");
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formProps = Object.fromEntries(new FormData(e.target));
-
 		const cityName = capitalize(formProps.cityName);
-		console.log("cityName", cityName);
-		if (cityName && !citiesList.value.includes(cityName)) {
-			citiesList.changeValue([...citiesList.value, cityName]);
-			// setCities([...cities, cityName]);
-			e.target[0].value = "";
-		}
+		if (addCity(cityName)) e.target[0].value = "";
 	};
 
 	return (

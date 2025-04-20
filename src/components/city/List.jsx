@@ -6,12 +6,12 @@ export default function List() {
 	const [cities, setCities] = useState(setInitialCities());
 
 	function setInitialCities() {
-		citiesList.addFunction("listComp", (cities) => setCities(cities));
+		citiesList.connectFunction("listComp", (cities) => setCities(cities));
 		return citiesList.value;
 	}
 
 	return (
-		<div style={{ direction: "ltr" }} className="flex flex-col gap-0.5">
+		<div className="direction-left flex flex-col gap-0.5">
 			{cities.map((city) => {
 				return <Card city={city} key={city} />;
 			})}
