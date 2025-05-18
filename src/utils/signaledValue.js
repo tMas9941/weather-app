@@ -9,7 +9,9 @@ export default class SignaledValue {
 	}
 
 	changeValue(newValue) {
-		this.value = newValue;
-		Object.values(this.connectedFunctions).forEach((func) => func(newValue));
+		if (this.value != newValue) {
+			this.value = newValue;
+			Object.values(this.connectedFunctions).forEach((func) => func(newValue));
+		}
 	}
 }

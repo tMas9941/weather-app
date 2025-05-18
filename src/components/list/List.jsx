@@ -9,7 +9,7 @@ export default function List() {
 		citiesList.connectFunction("listComp", (cities) => setCities(cities));
 		return citiesList.value;
 	}
-
+	if (!cities) return <></>;
 	return (
 		<div className="direction-left flex flex-col gap-0.5">
 			{cities.map((city) => {

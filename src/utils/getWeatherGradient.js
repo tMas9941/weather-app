@@ -20,6 +20,8 @@ export default function getWeatherGradient(is_day, condition, direction = "to-r"
 		tailwindString += `to-gray-${700 - is_day * 500}`;
 	} else if (hasCondition(["ice", "snow", "sleet"])) {
 		tailwindString += `to-indigo-${800 - is_day * 400}`;
+	} else {
+		tailwindString = "bg-black";
 	}
 
 	return tailwindString;

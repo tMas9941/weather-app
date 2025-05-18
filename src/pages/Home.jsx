@@ -1,10 +1,10 @@
 import React from "react";
 
 // Components
-import List from "../components/city/List";
+import List from "../components/list/List";
 import Input from "../components/Input";
 import SideBar from "../components/SideBar";
-import Details from "../components/city/Details";
+import Details from "../components/details/Details";
 
 export default function Home() {
 	return (
