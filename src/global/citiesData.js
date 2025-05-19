@@ -1,4 +1,5 @@
 import SignaledValue from "../utils/signaledValue.js";
+import WEATHER_API_KEY from "../constants/keys.js/";
 const initialCity = "Budapest";
 
 export const favoriteCity = new SignaledValue(localStorage.getItem("favoriteCity") || initialCity);
@@ -6,6 +7,8 @@ export const selectedCity = new SignaledValue(localStorage.getItem("favoriteCity
 export const citiesList = new SignaledValue(
 	localStorage.getItem("cities") ? localStorage.getItem("cities").split(",") : [initialCity]
 );
+localStorage.setItem("cities", []);
+export const inputStatus = new SignaledValue("ready");
 
 export function cahngeSelectedCity(newCity) {
 	selectedCity.changeValue(newCity);
@@ -16,25 +19,36 @@ export function changeFavoriteCity(newCity) {
 }
 
 export function addCity(newCity) {
-	if (newCity && !citiesList.value.includes(newCity)) {
-		citiesList.changeValue([...citiesList.value, newCity]);
-		localStorage.setItem("cities", citiesList.value);
-		return true;
+	if (!newCity) return;
+	inputStatus.changeValue("loading");
+	try {
+		fetch(`http://api.weatherapi.com/v1/search.json?key=${WEATHER_API_KEY}&q=${newCity}`)
+			.then((response) => (response.ok ? response.json() : null))
+			.then((json) => {
+				if (json.length) {
+					if (!citiesList.value.includes(json[0].name)) {
+						citiesList.changeValue([...citiesList.value, json[0].name]);
+						localStorage.setItem("cities", citiesList.value);
+						inputStatus.changeValue("cityFound");
+					} else {
+						inputStatus.changeValue("cityAddedAlready");
+					}
+				} else {
+					inputStatus.changeValue("cityNotFound");
+				}
+			});
+	} catch (error) {
+		inputStatus.changeValue("fetchError");
 	}
-	return false;
 }
 
 export function removeCity(city) {
 	const newCitisList = [...citiesList.value];
 	newCitisList.splice(citiesList.value.indexOf(city), 1);
 	citiesList.changeValue(newCitisList);
-	console.log("newCitisList  ", newCitisList);
-	// citiesList.changeValue(citiesList.value.splice(citiesList.value.indexOf(city), 1));
 	localStorage.setItem("cities", citiesList.value);
-	console.log("citiesList  ", citiesList);
 	if (city === favoriteCity.value) localStorage.removeItem("favoriteCity");
 	if (city === selectedCity.value) {
-		console.log("enter");
 		if (newCitisList.length > 0) {
 			localStorage.setItem("selectedCity", newCitisList[0]);
 		} else {
@@ -43,7 +57,7 @@ export function removeCity(city) {
 
 		console.log(`"localStorage.getItem("selectedCity") "`, localStorage.getItem("selectedCity"));
 		selectedCity.changeValue(localStorage.getItem("selectedCity"));
-		document.getElementById(selectedCity.value).click();
+		document.getElementById("card" + selectedCity.value).click();
 		console.log("selectedCity  ", selectedCity);
 	}
 }

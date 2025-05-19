@@ -18,11 +18,12 @@ const Card = memo(function createCard({ city }) {
 		toggleOn();
 		cahngeSelectedCity(city);
 	};
+
 	if (!data) return <></>;
-	// console.log("renddedsrd card ", city);
+
 	return (
 		<div
-			id={city}
+			id={"card" + city}
 			className={`${getWeatherGradient(data.current.is_day, data.current.condition.text)} ${
 				selected ? " left-0" : " -left-5"
 			}
@@ -31,7 +32,7 @@ const Card = memo(function createCard({ city }) {
 				hover:ring-2 ring-white`}
 			onClick={handleClick}
 		>
-			<div className="grid grid-cols-5 justify-between ">
+			<div className="grid grid-cols-5 justify-between select-none ">
 				<div className="col-span-3 ">
 					<h2 className="text-xl font-bold ">{city}</h2>
 					<p> {data.location.country}</p>
