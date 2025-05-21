@@ -10,9 +10,9 @@ import RemoveButton from "./RemoveButton";
 
 export default function Details() {
 	const details = useCityDetails();
-	console.log("details  ", details);
+
 	if (!details) return <div className="bg-linear-to-b from-sky-200 to-primary w-full h-auto"></div>;
-	console.log("details done  ");
+
 	return (
 		<div
 			className={`ps-85 w-full h-auto flex flex-col items-center ${

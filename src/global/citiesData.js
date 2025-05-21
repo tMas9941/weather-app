@@ -2,12 +2,16 @@ import SignaledValue from "../utils/signaledValue.js";
 import WEATHER_API_KEY from "../constants/keys.js/";
 const initialCity = "Budapest";
 
-export const favoriteCity = new SignaledValue(localStorage.getItem("favoriteCity") || initialCity);
-export const selectedCity = new SignaledValue(localStorage.getItem("favoriteCity") || initialCity);
+// localStorage.setItem("cities", []); // RESET CITIES
+
+export const favoriteCity = new SignaledValue(localStorage.getItem("favoriteCity"));
 export const citiesList = new SignaledValue(
-	localStorage.getItem("cities") ? localStorage.getItem("cities").split(",") : [initialCity]
+	localStorage.getItem("cities") ? localStorage.getItem("cities").split(",") : []
 );
-localStorage.setItem("cities", []);
+export const selectedCity = new SignaledValue(
+	localStorage.getItem("favoriteCity") || citiesList.value[0] || initialCity
+);
+
 export const inputStatus = new SignaledValue("ready");
 
 export function cahngeSelectedCity(newCity) {
@@ -19,7 +23,7 @@ export function changeFavoriteCity(newCity) {
 }
 
 export function addCity(newCity) {
-	if (!newCity) return;
+	if (!newCity) return inputStatus.changeValue("emptyInput");
 	inputStatus.changeValue("loading");
 	try {
 		fetch(`http://api.weatherapi.com/v1/search.json?key=${WEATHER_API_KEY}&q=${newCity}`)
@@ -43,21 +47,20 @@ export function addCity(newCity) {
 }
 
 export function removeCity(city) {
-	const newCitisList = [...citiesList.value];
-	newCitisList.splice(citiesList.value.indexOf(city), 1);
-	citiesList.changeValue(newCitisList);
+	// update citiesList
+	const newCitiesList = [...citiesList.value];
+	newCitiesList.splice(citiesList.value.indexOf(city), 1);
+	citiesList.changeValue(newCitiesList);
 	localStorage.setItem("cities", citiesList.value);
+
+	// change Cards
 	if (city === favoriteCity.value) localStorage.removeItem("favoriteCity");
 	if (city === selectedCity.value) {
-		if (newCitisList.length > 0) {
-			localStorage.setItem("selectedCity", newCitisList[0]);
+		if (newCitiesList.length > 0) {
+			console.log(" newCitiesList[0]  ", newCitiesList[0]);
+			document.getElementById("card" + newCitiesList[0]).click();
 		} else {
-			localStorage.setItem("selectedCity", initialCity);
+			localStorage.setItem("selectedCity", null);
 		}
-
-		console.log(`"localStorage.getItem("selectedCity") "`, localStorage.getItem("selectedCity"));
-		selectedCity.changeValue(localStorage.getItem("selectedCity"));
-		document.getElementById("card" + selectedCity.value).click();
-		console.log("selectedCity  ", selectedCity);
 	}
 }

@@ -1,12 +1,9 @@
 import React from "react";
-import Spinner from "./misc/Spinner";
-import { inputStatus } from "../global/citiesData";
+import Spinner from "../misc/Spinner";
 
 const SIZE = 40;
 
-export default function InputStatus({ status }) {
-	if (!["ready", "loading"].includes(status)) setTimeout(() => inputStatus.changeValue("ready"), 1000);
-
+export default function InputStatusIcon({ status }) {
 	switch (status) {
 		case "cityAddedAlready":
 		case "cityNotFound":
