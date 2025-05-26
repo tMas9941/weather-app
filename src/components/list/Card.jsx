@@ -6,16 +6,15 @@ import FavoriteButton from "../details/FavoriteButton.jsx";
 // Utils
 import getWeatherGradient from "../../utils/getWeatherGradient.js";
 // Hooks
-import buttonToggler from "../../utils/buttonToggler.js";
+import buttonToggler from "../../hooks/useToggleCard.js";
 import RemoveButton from "../details/RemoveButton.jsx";
 
 const Card = memo(function createCard({ city }) {
 	const data = useCityWeather(city);
-	const [selected, toggleOn] = buttonToggler(city);
+	const selected = buttonToggler(city);
 
 	const handleClick = (e) => {
 		e.stopPropagation();
-		toggleOn();
 		cahngeSelectedCity(city);
 	};
 

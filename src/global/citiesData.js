@@ -1,6 +1,5 @@
 import SignaledValue from "../utils/signaledValue.js";
 import WEATHER_API_KEY from "../constants/keys.js/";
-const initialCity = "Budapest";
 
 // localStorage.setItem("cities", []); // RESET CITIES
 
@@ -8,9 +7,8 @@ export const favoriteCity = new SignaledValue(localStorage.getItem("favoriteCity
 export const citiesList = new SignaledValue(
 	localStorage.getItem("cities") ? localStorage.getItem("cities").split(",") : []
 );
-export const selectedCity = new SignaledValue(
-	localStorage.getItem("favoriteCity") || citiesList.value[0] || initialCity
-);
+export const citiesData = {};
+export const selectedCity = new SignaledValue(localStorage.getItem("favoriteCity") || citiesList.value[0]);
 
 export const inputStatus = new SignaledValue("ready");
 
@@ -32,7 +30,7 @@ export function addCity(newCity) {
 				if (json.length) {
 					if (!citiesList.value.includes(json[0].name)) {
 						citiesList.changeValue([...citiesList.value, json[0].name]);
-						localStorage.setItem("cities", citiesList.value);
+						selectedCity.changeValue(json[0].name);
 						inputStatus.changeValue("cityFound");
 					} else {
 						inputStatus.changeValue("cityAddedAlready");

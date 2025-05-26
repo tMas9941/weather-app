@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import WEATHER_API_KEY from "../constants/keys.js/";
-import { selectedCity } from "../global/citiesData";
+import { selectedCity, citiesData } from "../global/citiesData";
 
 export default function useCityDetails() {
 	const [data, setData] = useState();
@@ -11,10 +10,11 @@ export default function useCityDetails() {
 	}, []);
 
 	const cityChanged = (newCity) => {
-		fetch(`http://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${newCity}`)
-			.then((response) => (response.ok ? response.json() : null))
-			.then((json) => setData(json));
+		if (newCity in citiesData && selectedCity.value === newCity) {
+			setData(citiesData[newCity]);
+		} else {
+			setTimeout(() => cityChanged(newCity), 100);
+		}
 	};
-
 	return data;
 }

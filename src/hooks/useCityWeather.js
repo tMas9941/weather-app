@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import WEATHER_API_KEY from "../constants/keys.js/";
-import { citiesList } from "../global/citiesData";
+import { citiesList, citiesData } from "../global/citiesData";
 
 const INTERVAL = 300000;
 
@@ -20,7 +20,10 @@ export default function useCityWeather(city) {
 	function fetchData() {
 		fetch(`http://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${city}`)
 			.then((response) => (response.ok ? response.json() : null))
-			.then((json) => setData(json))
+			.then((json) => {
+				setData(json);
+				citiesData[city] = json;
+			})
 			.then(() => setTimeout(() => citiesList.value.includes(city) && fetchData(), INTERVAL));
 	}
 
