@@ -56,9 +56,9 @@ export function removeCity(city) {
 	if (city === favoriteCity.value) localStorage.removeItem("favoriteCity");
 	if (city === selectedCity.value) {
 		if (newCitiesList.length > 0) {
-			console.log(" newCitiesList[0]  ", newCitiesList[0]);
 			document.getElementById("card" + newCitiesList[0]).click();
 		} else {
+			cahngeSelectedCity(null);
 			localStorage.setItem("selectedCity", null);
 		}
 	}

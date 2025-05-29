@@ -10,10 +10,13 @@ export default function useCityDetails() {
 	}, []);
 
 	const cityChanged = (newCity) => {
-		if (newCity in citiesData && selectedCity.value === newCity) {
+		if (newCity in citiesData) {
 			setData(citiesData[newCity]);
-		} else {
+		} else if (newCity) {
+			// wait to finish fetching
 			setTimeout(() => cityChanged(newCity), 100);
+		} else {
+			setData(null);
 		}
 	};
 	return data;
