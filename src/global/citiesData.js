@@ -30,6 +30,7 @@ export function addCity(newCity) {
 				if (json.length) {
 					if (!citiesList.value.includes(json[0].name)) {
 						citiesList.changeValue([...citiesList.value, json[0].name]);
+						localStorage.setItem("cities", citiesList.value);
 						selectedCity.changeValue(json[0].name);
 						inputStatus.changeValue("cityFound");
 					} else {
