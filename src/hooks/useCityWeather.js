@@ -18,7 +18,7 @@ export default function useCityWeather(city) {
 	}, [city]);
 
 	function fetchData() {
-		fetch(`http://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${city}`)
+		fetch(`http://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${city}&days=2`)
 			.then((response) => (response.ok ? response.json() : null))
 			.then((json) => {
 				setData(json);

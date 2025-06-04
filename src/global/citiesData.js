@@ -7,7 +7,7 @@ export const favoriteCity = new SignaledValue(localStorage.getItem("favoriteCity
 export const citiesList = new SignaledValue(
 	localStorage.getItem("cities") ? localStorage.getItem("cities").split(",") : []
 );
-export const citiesData = {};
+export const citiesData = { length: () => Object.keys(citiesData).length - 1 };
 export const selectedCity = new SignaledValue(localStorage.getItem("favoriteCity") || citiesList.value[0]);
 
 export const inputStatus = new SignaledValue("ready");
