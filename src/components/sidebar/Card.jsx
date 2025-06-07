@@ -2,12 +2,12 @@ import React, { memo } from "react";
 import { cahngeSelectedCity } from "../../global/citiesData.js";
 // Components
 import useCityWeather from "../../hooks/useCityWeather.js";
-import FavoriteButton from "../details/FavoriteButton.jsx";
+import FavoriteButton from "../misc/FavoriteButton.jsx";
 // Utils
 import getWeatherGradient from "../../utils/getWeatherGradient.js";
 // Hooks
 import buttonToggler from "../../hooks/useToggleCard.js";
-import RemoveButton from "../details/RemoveButton.jsx";
+import RemoveButton from "../misc/RemoveButton.jsx";
 
 const Card = memo(function createCard({ city }) {
 	const data = useCityWeather(city);

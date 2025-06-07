@@ -1,56 +1,47 @@
 import React, { useEffect, useRef } from "react";
 import HourlyForecast from "./HourlyForecast";
 import ScrollButton from "./ScrollButton";
+import DetailsCard from "../DetailsCard";
+
 const SCROLL_SPEED = 3;
 
 export default function Forecast({ forecast, time }) {
 	const scrollContainer = useRef();
 	const currentHour = new Date(time).getHours();
 
-	const hourlyForecasts = forecast.forecastday[0].hour.slice(currentHour);
-	const hourlyForecastsNextDay = forecast.forecastday[1].hour.slice(0, currentHour);
+	const hourlyForecasts = [
+		...forecast.forecastday[0].hour.slice(currentHour),
+		...forecast.forecastday[1].hour.slice(0, currentHour),
+	];
 
-	useEffect(() => {
-		// reset scrollbar position
+	function scrollInDirection(newPositionX) {
 		scrollContainer.current.scrollTo({
 			top: 0,
-			left: 0,
+			left: scrollContainer.current.scrollLeft + newPositionX,
 			behavior: "smooth",
 		});
-	}, [forecast]);
+	}
+	useEffect(() => scrollInDirection(-10000), [forecast]);
 
-	const handleScroll = (event) => {
-		event.stopPropagation();
-		scrollContainer.current.scrollTo({
-			top: 0,
-			left: scrollContainer.current.scrollLeft + event.deltaY * SCROLL_SPEED,
-			behavior: "smooth",
-		});
+	const handleScroll = (e) => {
+		e.stopPropagation();
+		scrollInDirection(-e.deltaY * SCROLL_SPEED);
 	};
 
 	return (
-		<div
-			onWheel={handleScroll}
-			className="z-1 flex flex-col items-start w-full m-2 pt-5 pb-20 transition-all ease-out duration-500 "
-		>
-			<h1 className="text-4xl font-semibold">Daily Forecast</h1>
-			<p>{time}</p>
-
-			<div className="flex gap-10 pt-10 items-center">
-				<ScrollButton scrollContainer={scrollContainer} />
+		<DetailsCard title={"Daily Forecast"} desc={time}>
+			<div onWheel={handleScroll} className="min-w-[240px] max-w-[960px]  flex flex-row  gap-10 pt-10 items-center">
+				<ScrollButton scrollInDirection={scrollInDirection} />
 				<div
 					ref={scrollContainer}
-					className="w-[900px] h-40 flex flex-row gap-10 gap-y-10 px-10 border-x-2 border-white/40 overflow-x-scroll   custom-scrollbar-no-bg "
+					className="h-40 flex flex-row gap-10 gap-y-10 px-0 snap-x snap-proximity overflow-x-scroll overflow-y-hidden  custom-scrollbar-no-bg "
 				>
-					{hourlyForecasts.map((hForecast) => (
-						<HourlyForecast key={hForecast.time} forecast={hForecast} />
-					))}
-					{hourlyForecastsNextDay.map((hForecast) => (
-						<HourlyForecast key={hForecast.time} forecast={hForecast} />
+					{hourlyForecasts.map((hForecast, index) => (
+						<HourlyForecast key={hForecast.time} forecast={hForecast} index={index} />
 					))}
 				</div>
-				<ScrollButton direction={1} scrollContainer={scrollContainer} />
+				<ScrollButton direction={1} scrollInDirection={scrollInDirection} />
 			</div>
-		</div>
+		</DetailsCard>
 	);
 }

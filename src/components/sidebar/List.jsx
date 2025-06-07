@@ -11,7 +11,7 @@ export default function List() {
 	}
 	if (!cities) return <></>;
 	return (
-		<div className="direction-left flex flex-col gap-0.5">
+		<div className="snap-start direction-left flex flex-col gap-0.5">
 			{cities.map((city) => {
 				return <Card city={city} key={city} />;
 			})}

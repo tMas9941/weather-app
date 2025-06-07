@@ -8,9 +8,7 @@ export default function buttonToggler(city) {
 		selectedCity.connectFunction("cardToggle" + city, (newCity) => toggle(newCity));
 	}, [city]);
 
-	const toggle = (newCity) => {
-		setSelected(newCity === city);
-	};
+	const toggle = (newCity) => setSelected(newCity === city);
 
 	return selected;
 }

@@ -20,9 +20,13 @@ export default function getWeatherGradient(is_day, condition, direction = "to-r"
 		tailwindString += `to-gray-${700 - is_day * 500}`;
 	} else if (hasCondition(["ice", "snow", "sleet"])) {
 		tailwindString += `to-indigo-${800 - is_day * 400}`;
+	} else if (hasCondition(["thundery", "strom"])) {
+		tailwindString += `from-[50%] via-amber-200 via-[70%] to-gray-${700 - is_day * 300} `;
 	} else {
-		tailwindString = "bg-black";
+		tailwindString += "bg-black";
 	}
-
+	if (condition.toLowerCase().includes("thundery")) {
+		console.log("condition ", condition, is_day, tailwindString);
+	}
 	return tailwindString;
 }

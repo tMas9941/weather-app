@@ -1,15 +1,19 @@
-import React from "react";
-
-export default function HourlyForecast({ forecast }) {
+import React, { useRef } from "react";
+const SIZE = 100;
+export default function HourlyForecast({ forecast, index }) {
+	const container = useRef();
 	const hour = new Date(forecast.time).getHours();
-	// console.log("hour ", hour);
 
 	return (
-		<div className="relative h-20 w-20 text-xl text-center font-semibold -z-1">
-			<h2>{hour}</h2>
+		<div
+			ref={container}
+			style={{ minWidth: SIZE, height: SIZE }}
+			className={`snap-start text-2xl text-center font-semibold z-1 `}
+		>
+			<p>{index === 0 ? "Now" : hour + ":00"}</p>
 
-			<p className="relative text-4xl font-bold z-1 backdrop-blur-xs">{forecast.temp_c + "°"}</p>
-			<img src={forecast.condition.icon} className="absolute top-12 w-full h-full opacity-80" />
+			<p className="relative text-4xl font-bold z-2 backdrop-blur-xs">{forecast.temp_c + "°"}</p>
+			<img src={forecast.condition.icon} className="-mt-5 w-full h-full opacity-80" />
 		</div>
 	);
 }
