@@ -8,6 +8,8 @@ import RemoveButton from "../misc/RemoveButton";
 import Forecast from "./forecast/Forecast";
 import Location from "./Location";
 import Humidity from "./Humidity";
+import Wind from "./wind/Wind";
+import Sunshine from "./Sunshine";
 
 export default function Details() {
 	const details = useCityDetails();
@@ -21,9 +23,11 @@ export default function Details() {
 				<FavoriteButton city={details.location.name} fixed={true} className={"end-0"} />
 				<RemoveButton city={details.location.name} className={"end-0"} />
 			</div>
-			<div className="w-full flex flex-col gap-5 pe-20 ">
+			<div className="w-full flex flex-row flex-wrap gap-5 pe-20 ">
 				<Location details={details} />
+				<Sunshine details={details} />
 				<Forecast forecast={details.forecast} time={details.current.last_updated} />
+				<Wind details={details} />
 				<Humidity details={details} />
 			</div>
 		</div>

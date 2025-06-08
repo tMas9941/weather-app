@@ -9,10 +9,16 @@ import { citiesData, selectedCity } from "../global/citiesData";
 
 export default function Home() {
 	const homeSelectedCity = useSignaledValue(selectedCity, "homeSelectedCity");
+	// console.log(
+	// 	"citiesData[homeSelectedCity]?.current.is_day ",
+	// 	citiesData[homeSelectedCity]?.current.is_day,
+	// 	homeSelectedCity
+	// );
+	if (!citiesData[homeSelectedCity]) setTimeout(1000);
 	return (
 		<div
-			className={`w-screen bg-gray-800 min-h-screen pt-7 overflow-x-auto overflow-y-auto flex flex-row gap-10 ${getWeatherGradient(
-				citiesData[homeSelectedCity]?.current.is_day,
+			className={`w-screen bg-gray-800 min-h-screen py-7 overflow-x-auto overflow-y-auto flex flex-row gap-10 ${getWeatherGradient(
+				citiesData[homeSelectedCity] === undefined ? 1 : citiesData[homeSelectedCity]?.current.is_day,
 				citiesData[homeSelectedCity]?.current.condition.text || "Sunny",
 				"to-b"
 			)} transition-colors duration-[1.5s] ease-out`}
