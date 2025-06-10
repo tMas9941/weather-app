@@ -2,13 +2,9 @@ import React from "react";
 
 const SIZE = 100;
 const NEEDLE_SIZE = SIZE * 0.6;
-export default function Compass({ direction, isDay }) {
+export default function Compass({ direction }) {
 	return (
-		<div
-			className={`relative transition-all duration-500 ease-out ${
-				isDay ? "stroke-black fill-black" : "stroke-white fill-white"
-			}`}
-		>
+		<div className={`relative  transition-all duration-500 ease-out mt-3`}>
 			<svg
 				width={SIZE}
 				height={SIZE}
@@ -23,7 +19,7 @@ export default function Compass({ direction, isDay }) {
 				></path>
 			</svg>
 			<svg
-				className="absolute top-0"
+				className="absolute top-0 "
 				style={{ marginLeft: SIZE * ((SIZE - NEEDLE_SIZE) / 200), marginTop: SIZE * ((SIZE - NEEDLE_SIZE) / 200) }}
 				transform={`rotate(${direction},0,0)`}
 				width={NEEDLE_SIZE}

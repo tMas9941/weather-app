@@ -9,7 +9,7 @@ import getWeatherGradient from "../../utils/getWeatherGradient.js";
 import buttonToggler from "../../hooks/useToggleCard.js";
 import RemoveButton from "../misc/RemoveButton.jsx";
 
-const Card = memo(function createCard({ city }) {
+const Card = memo(function CreateCard({ city }) {
 	const data = useCityWeather(city);
 	const selected = buttonToggler(city);
 

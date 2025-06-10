@@ -12,12 +12,19 @@ export const selectedCity = new SignaledValue(localStorage.getItem("favoriteCity
 
 export const inputStatus = new SignaledValue("ready");
 
+export const nightMode = new SignaledValue(localStorage.getItem("nightMode") === "true");
+
 export function cahngeSelectedCity(newCity) {
 	selectedCity.changeValue(newCity);
 }
 export function changeFavoriteCity(newCity) {
-	localStorage.setItem("favoriteCity", newCity);
 	favoriteCity.changeValue(newCity);
+	localStorage.setItem("favoriteCity", newCity);
+}
+
+export function changeNightMode(value) {
+	nightMode.changeValue(value);
+	localStorage.setItem("nightMode", value);
 }
 
 export function addCity(newCity) {
@@ -42,6 +49,7 @@ export function addCity(newCity) {
 			});
 	} catch (error) {
 		inputStatus.changeValue("fetchError");
+		alert(error);
 	}
 }
 

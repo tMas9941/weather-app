@@ -15,8 +15,6 @@ export default function Forecast({ forecast, time }) {
 		...forecast.forecastday[1].hour.slice(0, currentHour),
 	];
 
-	console.log("hourlyForecasts ", hourlyForecasts);
-
 	function scrollInDirection(newPositionX) {
 		scrollContainer.current.scrollTo({
 			top: 0,

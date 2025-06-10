@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function useSignaledValue(signal, stateName) {
-	const [value, setValue] = useState(signal.value);
+	const [value, setValue] = useState(() => connectSignal(signal));
 
-	useEffect(() => {
+	function connectSignal(signal) {
 		signal.connectFunction(stateName, (newStatus) => setValue(newStatus));
-	}, []);
-
+		return signal.value;
+	}
 	return value;
 }

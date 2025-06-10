@@ -5,19 +5,19 @@ export default function useCityDetails() {
 	const [data, setData] = useState();
 
 	useEffect(() => {
+		function cityChanged(newCity) {
+			if (newCity in citiesData) {
+				setData(citiesData[newCity]);
+			} else if (newCity) {
+				// wait to finish fetching
+				setTimeout(() => cityChanged(newCity), 100);
+			} else {
+				setData(null);
+			}
+		}
 		selectedCity.connectFunction("detailsHook", (cityName) => cityChanged(cityName));
 		cityChanged(selectedCity.value);
 	}, []);
 
-	const cityChanged = (newCity) => {
-		if (newCity in citiesData) {
-			setData(citiesData[newCity]);
-		} else if (newCity) {
-			// wait to finish fetching
-			setTimeout(() => cityChanged(newCity), 100);
-		} else {
-			setData(null);
-		}
-	};
 	return data;
 }

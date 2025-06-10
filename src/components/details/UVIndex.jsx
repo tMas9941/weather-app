@@ -1,7 +1,7 @@
 import React from "react";
 import DetailsCard from "./DetailsCard";
 
-export default function Sunshine({ details }) {
+export default function UVIndex({ details }) {
 	const getUVStrength = (value) => {
 		if (value === 0) {
 			return "(No radiation)";
@@ -16,16 +16,15 @@ export default function Sunshine({ details }) {
 		}
 	};
 	return (
-		<DetailsCard title={"Sunshine "} className={"text-2xl [&_h3]:font-semibold [&>p]: [&_h3]:pt-2 [&_p]:font-medium "}>
-			<h3>UV Index</h3>
-			<p className="text-6xl font-bold *:text-xl *:font-medium">
+		<DetailsCard title={"UV Index"}>
+			<h3>
 				{details.current.uv}
-				<span> {getUVStrength(details.current.uv)}</span>
-			</p>
-			<h3>Cloud coverage</h3>
+				<span className="text-xl font-medium"> {getUVStrength(details.current.uv)}</span>
+			</h3>
+			<h4>Cloud coverage</h4>
 			<p>{details.current.cloud} %</p>
-			<h3>Feels like</h3>
-			<p>{details.current.feelslike_c} °C</p>
+			<h4>Feels like</h4>
+			<p> {details.current.feelslike_c} °C</p>
 		</DetailsCard>
 	);
 }

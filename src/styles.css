@@ -2,16 +2,28 @@
 
 @theme static {
 	/* --color-*: initial; */
-	--color-text: #01111;
+	/* --color-text: #01111;
 	--color-background: #f9fcff;
 	--color-primary: #0c8ff4;
 	--color-secondary: #f97a86;
-	--color-accent: #52aef1;
+	--color-accent: #52aef1; */
 
 	--color-black: #000;
 	--color-white: #fff;
 
 	--color-whitegray: #ededed;
+
+	--color-text: #061807;
+	--color-background: #f7fdf7;
+	--color-primary: #33cc33;
+	--color-secondary: #8de2c0;
+	--color-accent: #25937b;
+
+	--color-night-text: #e7f9e7;
+	--color-night-background: #0a2922;
+	--color-night-primary: #33cc33;
+	--color-night-secondary: #1d7250;
+	--color-night-accent: #6cdac2;
 }
 
 @layer base {
@@ -27,12 +39,12 @@
 	.custom-scrollbar {
 		scrollbar-width: thin;
 		scroll-behavior: smooth;
-		scrollbar-color: var(--color-accent) gray;
+		scrollbar-color: var(--color-primary) gray;
 	}
 	.custom-scrollbar-no-bg {
 		scrollbar-width: thin;
 		scroll-behavior: smooth;
-		scrollbar-color: var(--color-accent) rgba(255, 255, 255, 0);
+		scrollbar-color: var(--color-primary) rgba(255, 255, 255, 0);
 	}
 
 	.stroke-black {

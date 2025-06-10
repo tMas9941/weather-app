@@ -3,9 +3,9 @@ import DetailsCard from "./DetailsCard";
 
 export default function Humidity({ details }) {
 	return (
-		<DetailsCard title={"Humidity"} className={"text-2xl [&_p]:font-medium"}>
-			<p className="text-8xl font-bold">{details.current.humidity + " %"}</p>
-			<h3 className="font-semibold mt-5">Dew point:</h3>
+		<DetailsCard title={"Humidity"}>
+			<h3>{details.current.humidity + " %"}</h3>
+			<h4>Dew point:</h4>
 			<p>{details.current.dewpoint_c + " °C"}</p>
 		</DetailsCard>
 	);
