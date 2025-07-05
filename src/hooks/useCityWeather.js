@@ -16,17 +16,10 @@ export default function useCityWeather(city) {
 					citiesData[city] = json;
 				})
 				// refresh data after 5 mins
-				.then(() =>
-					setTimeout(
-						() => citiesList.value.includes(city) && fetchData(),
-						INTERVAL + Math.random() * 5000
-					)
-				);
+				.then(() => setTimeout(() => citiesList.value.includes(city) && fetchData(), INTERVAL + Math.random() * 5000));
 		}
 		let ready = false;
-		if (!ready) {
-			fetchData();
-		}
+		if (!ready) fetchData();
 		return () => {
 			ready = true;
 		};

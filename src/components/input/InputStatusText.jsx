@@ -9,15 +9,14 @@ const statusText = {
 	emptyInput: "Type a city name...",
 };
 
-export default function InputStatusText({ status }) {
+export default function InputStatusText({ isNightMode, status }) {
 	return (
 		<div
-			className={
-				(status === "ready" ? "-top-3 opacity-0" : "top-0") +
-				"  z-auto select-none transition-all ease-out duration-300 relative bg-linear-to-b from-transparent to-20% to-white/70 h-10 w-full text-gray-600 flex items-center"
-			}
+			className={`${isNightMode ? " text-night-text " : " text-text "} 
+                ${status === "ready" ? "opacity-0" : ""}
+				z-auto mt-1 select-none transition-all ease-out duration-150 relative min-h-10 w-full flex items-center`}
 		>
-			<p className="ms-auto mt-1 me-5 font-semibold text-xl">{statusText[status]}</p>
+			<p className="mx-2 font-semibold text-xl ">{statusText[status]}</p>
 		</div>
 	);
 }

@@ -1,9 +1,6 @@
-import { nightMode, changeNightMode } from "../../global/citiesData";
-import useSignaledValue from "../../hooks/useSignaledValue";
+import { changeNightMode } from "../../global/citiesData";
 
-export default function NightModeSwitch({ scale = 0.8 }) {
-	const isNightMode = useSignaledValue(nightMode, "nightModeSwitch");
-	// const isNightMode = false;
+export default function NightModeSwitch({ isNightMode, scale = 0.8 }) {
 	return (
 		<button
 			style={{ scale: scale }}

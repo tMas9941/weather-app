@@ -6,7 +6,7 @@ import useSignaledValue from "../../hooks/useSignaledValue.js";
 import { fetchNewCity, inputStatus } from "../../global/citiesData.js";
 import { useSearchParams } from "react-router-dom";
 
-export default function Input() {
+export default function InputBar({ isNightMode }) {
 	const [, setSearchParams] = useSearchParams();
 	const status = useSignaledValue(inputStatus, "inputStatus");
 	const inputRef = useRef();
@@ -26,11 +26,11 @@ export default function Input() {
 	};
 
 	return (
-		<div className=" min-h-12 text-white w-full px-3 flex flex-col">
+		<div className="h-10 w-fit px-3 flex flex-col">
 			<form
 				style={{ direction: "ltr" }}
 				onSubmit={handleSubmit}
-				className="z-5 h-full border border-white/40 bg-gray-700/50 flex items-center gap-3"
+				className="z-5 h-full border bg-gray-200/20 border-gray-700/50 flex items-center gap-3"
 			>
 				<input
 					type="text"
@@ -47,13 +47,13 @@ export default function Input() {
 					type="submit"
 					className={
 						(status === "loading" ? "bg-white/40" : "bg-primary") +
-						" h-10 px-5 hover:brightness-120 active:brightness-150 text-center ease-out duration-150 cursor-pointer"
+						" h-10 px-5 hover:brightness-110 active:brightness-100 text-center text-white cursor-pointer"
 					}
 				>
 					Add
 				</button>
 			</form>
-			<InputStatusText status={status} />
+			<InputStatusText status={status} isNightMode={isNightMode} />
 		</div>
 	);
 }

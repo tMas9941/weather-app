@@ -12,11 +12,11 @@ export default function Home() {
 	return (
 		<div
 			className={`w-screen min-h-screen overflow-x-auto overflow-y-auto flex flex-row gap-10 
-			transition-colors duration-[1s] ease-out ${
-				isNightMode
-					? "bg-night-background text-night-text stroke-night-text fill-night-text [&_h3]:text-secondary bg-background/5"
-					: "bg-backround text-text stroke-text fill-text [&_h3]:text-night-secondary bg-night-background/10"
-			}`}
+			 ${
+					isNightMode
+						? "bg-night-background text-night-text stroke-night-text fill-night-text [&_h3]:text-secondary "
+						: "bg-background text-text stroke-text fill-text [&_h3]:text-night-secondary"
+				}`}
 		>
 			<SideBar />
 			<div className={`w-[1200px] pb-10 flex flex-col ${isNightMode ? "bg-background/10" : "bg-night-background/5"}`}>
