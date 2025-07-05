@@ -2,27 +2,28 @@ import React from "react";
 
 // Components
 import SideBar from "../components/sidebar/SideBar";
-import Details from "../components/details/Details";
 import useSignaledValue from "../hooks/useSignaledValue";
-import { citiesData, selectedCity, nightMode } from "../global/citiesData";
+import { nightMode } from "../global/citiesData";
+import { Outlet } from "react-router-dom";
 
 export default function Home() {
-	const homeSelectedCity = useSignaledValue(selectedCity, "homeSelectedCity");
 	const isNightMode = useSignaledValue(nightMode, "homeNightMode");
-
-	if (!citiesData[homeSelectedCity]) setTimeout(1000);
 
 	return (
 		<div
-			className={`w-screen  min-h-screen py-7 overflow-x-auto overflow-y-auto flex flex-row gap-10 
+			className={`w-screen min-h-screen overflow-x-auto overflow-y-auto flex flex-row gap-10 
 			transition-colors duration-[1s] ease-out ${
 				isNightMode
-					? "bg-night-background text-night-text stroke-night-text fill-night-text"
-					: "bg-backround text-text stroke-text fill-text"
+					? "bg-night-background text-night-text stroke-night-text fill-night-text [&_h3]:text-secondary bg-background/5"
+					: "bg-backround text-text stroke-text fill-text [&_h3]:text-night-secondary bg-night-background/10"
 			}`}
 		>
 			<SideBar />
-			<Details />
+			<div className={`w-[1200px] pb-10 flex flex-col ${isNightMode ? "bg-background/10" : "bg-night-background/5"}`}>
+				<Outlet />
+			</div>
+
+			{/* <Details /> */}
 		</div>
 	);
 }

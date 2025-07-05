@@ -1,13 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
 // Pages
 import Home from "./pages/Home.jsx";
+import DailyForecastPage from "./pages/DailyForecastPage.jsx";
 
 function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={<Home />}>
+					<Route index element={<DailyForecastPage />} />
+					<Route path="daily" element={<DailyForecastPage />} />
+					<Route path="weekly" element={<div>weekly</div>} />
+				</Route>
 			</Routes>
 		</Router>
 	);

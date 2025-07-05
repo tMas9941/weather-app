@@ -13,7 +13,7 @@ export default function InputStatusText({ status }) {
 	return (
 		<div
 			className={
-				(status === "ready" ? "-top-8 opacity-0" : "top-0") +
+				(status === "ready" ? "-top-3 opacity-0" : "top-0") +
 				"  z-auto select-none transition-all ease-out duration-300 relative bg-linear-to-b from-transparent to-20% to-white/70 h-10 w-full text-gray-600 flex items-center"
 			}
 		>

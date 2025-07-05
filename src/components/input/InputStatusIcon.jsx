@@ -1,17 +1,15 @@
 import React from "react";
 import Spinner from "../misc/Spinner";
 
-const SIZE = 40;
-
-export default function InputStatusIcon({ status }) {
+export default function InputStatusIcon({ status, size }) {
 	switch (status) {
 		case "cityAddedAlready":
 		case "cityNotFound":
 			return (
 				<svg
 					fill="#f27476"
-					width={SIZE}
-					height={SIZE}
+					width={size}
+					height={size}
 					strokeWidth="1.5"
 					viewBox="0 0 32 32"
 					version="1.1"
@@ -23,19 +21,19 @@ export default function InputStatusIcon({ status }) {
 			);
 		case "cityFound":
 			return (
-				<svg fill="#30db63" width={SIZE} height={SIZE} viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg">
+				<svg fill="#30db63" width={size} height={size} viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg">
 					<path d="M4.63 15.638a1.028 1.028 0 0 1-.79-.37L.36 11.09a1.03 1.03 0 1 1 1.58-1.316l2.535 3.043L9.958 3.32a1.029 1.029 0 0 1 1.783 1.03L5.52 15.122a1.03 1.03 0 0 1-.803.511.89.89 0 0 1-.088.004z" />
 				</svg>
 			);
 		case "loading":
 			return (
 				<div>
-					<Spinner size={SIZE * 0.7} />
+					<Spinner size={size * 0.7} />
 				</div>
 			);
 		default:
 			return (
-				<svg width={SIZE} height={SIZE} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
 						d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
 						stroke="#cccccc"

@@ -4,7 +4,7 @@ import Compass from "./Compass";
 
 export default function Wind({ details }) {
 	return (
-		<DetailsCard title={"Windspeed"}>
+		<DetailsCard title={"Windspeed"} className={"col-span-3"}>
 			<div className="flex flex-row justify-between gap-10 min-w-[450px]">
 				<div>
 					<h3 className="!font-semibold">{details.current.wind_kph} km/h</h3>

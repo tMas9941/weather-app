@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import WEATHER_API_KEY from "../constants/keys.js/";
-import { citiesList, citiesData } from "../global/citiesData";
+import { citiesData, citiesList } from "../global/citiesData";
 
 const INTERVAL = 300000; // weatherapi refreshes its data every 5 mins
 
@@ -15,7 +15,13 @@ export default function useCityWeather(city) {
 					setData(json);
 					citiesData[city] = json;
 				})
-				.then(() => setTimeout(() => citiesList.value.includes(city) && fetchData(), INTERVAL + Math.random() * 5000));
+				// refresh data after 5 mins
+				.then(() =>
+					setTimeout(
+						() => citiesList.value.includes(city) && fetchData(),
+						INTERVAL + Math.random() * 5000
+					)
+				);
 		}
 		let ready = false;
 		if (!ready) {

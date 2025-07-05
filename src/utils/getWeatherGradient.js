@@ -25,8 +25,6 @@ export default function getWeatherGradient(is_day, condition, direction = "to-r"
 	} else {
 		tailwindString += "bg-black";
 	}
-	if (condition.toLowerCase().includes("thundery")) {
-		console.log("condition ", condition, is_day, tailwindString);
-	}
+
 	return tailwindString;
 }

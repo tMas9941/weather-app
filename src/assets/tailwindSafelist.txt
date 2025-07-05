@@ -19,12 +19,10 @@ to-cyan-950
 to-indigo-400
 to-indigo-800
 
-
 to-gray-200
 to-gray-400
 to-gray-500
 to-gray-700
-
 
 to-amber-100
 to-amber-200
@@ -32,4 +30,9 @@ to-amber-400
 to-amber-500
 to-amber-800
 
+red-800
+yellow-400
+orange-400
+red-600
+red-800
 

@@ -1,19 +1,28 @@
 import React, { useRef } from "react";
-import { addCity, inputStatus } from "../../global/citiesData.js";
+
 import InputStatusIcon from "./InputStatusIcon.jsx";
 import InputStatusText from "./InputStatusText.jsx";
 import useSignaledValue from "../../hooks/useSignaledValue.js";
+import { fetchNewCity, inputStatus } from "../../global/citiesData.js";
+import { useSearchParams } from "react-router-dom";
 
 export default function Input() {
+	const [, setSearchParams] = useSearchParams();
 	const status = useSignaledValue(inputStatus, "inputStatus");
 	const inputRef = useRef();
 
-	if (!["ready", "loading"].includes(status)) setTimeout(() => inputStatus.changeValue("ready"), 1500);
-	if (status === "cityFound") inputRef.current.value = "";
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		addCity(inputRef.current.value);
+
+		(async () => {
+			// if city found => cahnge URL to activate new card
+			const newCityName = await fetchNewCity(inputRef.current.value);
+			if (newCityName) {
+				setSearchParams({ city: newCityName });
+				inputRef.current.value = "";
+			}
+			setTimeout(() => inputStatus.changeValue("ready"), 2000);
+		})();
 	};
 
 	return (
@@ -30,7 +39,9 @@ export default function Input() {
 					placeholder="Add new city..."
 					className="h-full w-full ps-5  text-xl outline-none"
 				/>
-				<InputStatusIcon status={status} />
+				<div className="min-w-[30px]">
+					<InputStatusIcon status={status} size={30} />
+				</div>
 				<button
 					disabled={status === "loading"}
 					type="submit"

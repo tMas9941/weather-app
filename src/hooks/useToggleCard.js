@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { selectedCity } from "../global/citiesData.js";
 
-export default function useToggleCard(city) {
-	const [selected, setSelected] = useState(city === selectedCity.value ? true : false);
+export default function useToggleCard(city, searchParams) {
+	const [selected, setSelected] = useState(city === searchParams ? true : false);
 
-	useEffect(() => {
-		const toggle = (newCity) => setSelected(newCity === city);
-		selectedCity.connectFunction("cardToggle" + city, (newCity) => toggle(newCity));
-	}, [city]);
+	useEffect(
+		(city, selected) => {
+			if ((city === searchParams ? true : false) !== selected) setSelected(city === searchParams);
+		},
+		[searchParams]
+	);
 
 	return selected;
 }

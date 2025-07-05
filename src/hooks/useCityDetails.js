@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
-import { selectedCity, citiesData } from "../global/citiesData";
+import { useMemo, useState } from "react";
+import { citiesData } from "../global/citiesData";
 
-export default function useCityDetails() {
+export default function useCityDetails(cityName) {
 	const [data, setData] = useState();
 
-	useEffect(() => {
+	useMemo(() => {
 		function cityChanged(newCity) {
 			if (newCity in citiesData) {
 				setData(citiesData[newCity]);
 			} else if (newCity) {
-				// wait to finish fetching
-				setTimeout(() => cityChanged(newCity), 100);
+				// try again if fetching isn't finished
+				setTimeout(() => cityChanged(newCity), 200);
 			} else {
 				setData(null);
 			}
 		}
-		selectedCity.connectFunction("detailsHook", (cityName) => cityChanged(cityName));
-		cityChanged(selectedCity.value);
-	}, []);
+		cityChanged(cityName);
+	}, [cityName]);
 
 	return data;
 }

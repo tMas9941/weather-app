@@ -1,5 +1,6 @@
 import React from "react";
-import { nightMode } from "../../../global/citiesData";
+import { nightMode } from "../../../../global/citiesData";
+import useSignaledValue from "../../../../hooks/useSignaledValue";
 
 const diagram = {
 	width: 1000,
@@ -9,6 +10,7 @@ const diagram = {
 const POINT_DISTANCE = diagram.width / 23;
 
 export default function DailyDiagram({ forecasts }) {
+	const isNightMode = useSignaledValue(nightMode, "dailyDiagram");
 	const hourlyTemperatures = forecasts.map((forecast) => forecast.temp_c);
 	const minTemp = Math.min(...hourlyTemperatures);
 	const maxTemp = Math.max(...hourlyTemperatures);
@@ -27,14 +29,14 @@ export default function DailyDiagram({ forecasts }) {
 	return (
 		<>
 			<svg
-				className={`${nightMode.value ? "stroke-night-accent fill-night-accent/40" : "stroke-accent fill-accent/40"}`}
+				className={`${isNightMode ? "stroke-night-accent fill-night-accent/40" : "stroke-accent fill-accent/40"}`}
 				width={diagram.width}
 				height={diagram.height}
 				viewBox={`-10 -${diagram.height - 5} ${diagram.width + 20} ${diagram.height + 10}`}
 				aria-hidden="true"
 				role="img"
 			>
-				{/* graph */}
+				{/* graph */}isNightMode
 				<path
 					d={`M0 ${diagram.height} ${diagram.pointsString} L${diagram.width} ${diagram.height} Z`}
 					strokeWidth={3}
@@ -42,7 +44,7 @@ export default function DailyDiagram({ forecasts }) {
 				{positions.map((pos, index) => (
 					<React.Fragment key={pos[0]}>
 						<circle
-							className={`fill-white [&:hover+*]:block ${nightMode.value ? "stroke-night-accent " : "stroke-accent "}`}
+							className={`fill-white [&:hover+*]:block ${isNightMode ? "stroke-night-accent " : "stroke-accent "}`}
 							r="8"
 							cx={pos[0]}
 							cy={pos[1]}
@@ -50,7 +52,7 @@ export default function DailyDiagram({ forecasts }) {
 						/>
 
 						<text
-							className={`hidden ${nightMode.value ? "stroke-night-text fill-night-text" : "stroke-text fill-text"}`}
+							className={`hidden ${isNightMode ? "stroke-night-text fill-night-text" : "stroke-text fill-text"}`}
 							x={pos[0] - index * 3}
 							y={pos[1] - 100 > -diagram.height ? pos[1] - 70 : pos[1] + 30}
 							aria-hidden="true"
@@ -61,9 +63,8 @@ export default function DailyDiagram({ forecasts }) {
 						</text>
 					</React.Fragment>
 				))}
-
 				{/* hour spans */}
-				{forecasts.map((forecast, index) =>
+				{forecasts.forEach((forecast, index) =>
 					index % 6 === 0 || index == 23 ? (
 						<text key={forecast.time} x={(diagram.width / 24) * index} y={-diagram.height + 21} fontSize="20">
 							{new Date(forecast.time).getHours() + ":00"}

@@ -2,24 +2,31 @@ import React from "react";
 import DetailsCard from "./DetailsCard";
 
 export default function UVIndex({ details }) {
-	const getUVStrength = (value) => {
-		if (value === 0) {
-			return "(No radiation)";
-		} else if (value <= 3) {
-			return "(Low radiation)";
-		} else if (value <= 6) {
-			return "(Medium radiation)";
-		} else if (value <= 8) {
-			return "(High radiation)";
-		} else {
-			return "(Very high radiation)";
-		}
-	};
+	let dynTextColor;
+	let dynText;
+
+	if (details.current.uv === 0) {
+		dynTextColor = "text-gray-800";
+		dynText = dynText = "None";
+	} else if (details.current.uv <= 3) {
+		dynTextColor = "text-yellow-200";
+		dynText = "Low";
+	} else if (details.current.uv <= 6) {
+		dynTextColor = "text-orange-400";
+		dynText = "Medium";
+	} else if (details.current.uv <= 8) {
+		dynTextColor = "text-red-600";
+		dynText = "High";
+	} else {
+		dynTextColor = "text-red-800";
+		dynText = "Very high";
+	}
+
 	return (
-		<DetailsCard title={"UV Index"}>
+		<DetailsCard title={"UV Index"} className={"col-span-2 w-full"}>
 			<h3>
 				{details.current.uv}
-				<span className="text-xl font-medium"> {getUVStrength(details.current.uv)}</span>
+				<span className={"text-2xl font-medium " + dynTextColor}> {dynText}</span>
 			</h3>
 			<h4>Cloud coverage</h4>
 			<p>{details.current.cloud} %</p>
