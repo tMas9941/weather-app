@@ -12,7 +12,12 @@ export default function List() {
 		return citiesList.value;
 	}
 
-	const memorizedSetSearchParams = useCallback((newCity) => setSearchParams({ city: newCity }), []);
+	const memorizedSetSearchParams = useCallback(
+		(newCity) => {
+			setSearchParams({ city: newCity });
+		},
+		[window.location.pathname]
+	);
 
 	if (!cities) return <></>;
 	return (

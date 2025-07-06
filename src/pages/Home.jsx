@@ -22,8 +22,6 @@ export default function Home() {
 			<div className={`w-[1200px] pb-10 flex flex-col ${isNightMode ? "bg-background/10" : "bg-night-background/5"}`}>
 				<Outlet />
 			</div>
-
-			{/* <Details /> */}
 		</div>
 	);
 }
