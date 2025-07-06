@@ -36,7 +36,7 @@ export default function DailyDiagram({ forecasts }) {
 				aria-hidden="true"
 				role="img"
 			>
-				{/* graph */}isNightMode
+				{/* graph */}
 				<path
 					d={`M0 ${diagram.height} ${diagram.pointsString} L${diagram.width} ${diagram.height} Z`}
 					strokeWidth={3}

@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 
 import useCityDetails from "../hooks/useCityDetails";
-
 import DailyForecast from "../components/details/forecast/daily/DailyForecast";
 import { useSearchParams } from "react-router-dom";
 
