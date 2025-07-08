@@ -49,6 +49,7 @@ export default function InputBar({ isNightMode }) {
 						(status === "loading" ? "bg-white/40" : "bg-primary") +
 						" h-10 px-5 hover:brightness-110 active:brightness-100 text-center text-white cursor-pointer"
 					}
+					title="Add city to list"
 				>
 					Add
 				</button>

@@ -9,7 +9,6 @@ export default function WeeklyTemperature({ data }) {
 		...data.forecast.forecastday[1].hour,
 		...data.forecast.forecastday[2].hour,
 	];
-	// .filter((forecast, index) => (index % 2 === 0 || index === 0) && forecast);
 
 	return (
 		<DetailsCard title={"Weeekly Temperature"} desc={data.current.last_updated} className={"col-span-5"}>

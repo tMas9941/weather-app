@@ -5,9 +5,7 @@ import useWeeklyForecast from "../hooks/useWeeklyForecast";
 
 export default function WeeklyForecastPage() {
 	const [searchParams] = useSearchParams();
-	// TODO fix repeating changes selected city
 	const data = useWeeklyForecast(searchParams.get("city"));
 
-	// console.log("details ", details);
 	return useMemo(() => <WeeklyForecast data={data} />, [data]);
 }

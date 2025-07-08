@@ -13,7 +13,7 @@ const diagram = {
 
 export default function WeekylDiagram({ forecasts, density = 1 }) {
 	const tooltipRef = useRef();
-	// diagram.width = document.
+
 	const isNightMode = useSignaledValue(nightMode, "dailyDiagram");
 
 	const hourlyTemperatures = forecasts.map((forecast) => forecast.temp_c);
@@ -58,7 +58,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 	const hideTooltip = () => {
 		tooltipRef.current.hidden = true;
 	};
-	console.log(forecasts);
+
 	return (
 		<>
 			<DiagramTooltip ref={tooltipRef} isNightMode={isNightMode} />
@@ -126,7 +126,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 						)
 				)}
 			</svg>
-			<div className={`top-0 flex w-[${diagram.width}px] justify-between -gap-2`}>
+			<div className={` flex w-[${diagram.width}px] justify-between -gap-2`}>
 				<DiagramIcon icon={forecasts[0].condition.icon} title={forecasts[0].condition.text} />
 				{forecasts.map(
 					(forecast, index) =>
@@ -135,6 +135,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 							<DiagramIcon icon={forecast.condition.icon} title={forecast.condition.text} />
 						)
 				)}
+				<DiagramIcon icon={forecasts[0].condition.icon} title={forecasts[forecasts.length - 1].condition.text} />
 			</div>
 		</>
 	);

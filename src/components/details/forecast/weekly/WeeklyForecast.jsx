@@ -3,12 +3,12 @@ import React from "react";
 import WeeklyTemperature from "./WeeklyTemperature";
 import Location from "../../Location";
 import AvgDetails from "./AvgDetails";
-import CityNotFound from "../CityNotFound";
 
 export default function WeeklyForecast({ data }) {
-	if (!data) return <CityNotFound />;
+	if (!data) return <></>;
+
 	return (
-		<div className="w-full grid grid-cols-5 gap-10 pe-20 ">
+		<div className="w-full grid grid-cols-5 gap-10 ">
 			<Location details={data} />
 			<AvgDetails data={data} />
 			<WeeklyTemperature data={data} />

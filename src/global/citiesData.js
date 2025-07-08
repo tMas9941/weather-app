@@ -17,6 +17,28 @@ export const changeNightMode = (value) => {
 	localStorage.setItem("nightMode", value);
 };
 
+export const MoveCityInList = (city, direction) => {
+	const index = citiesList.value.indexOf(city);
+
+	if (index === 0) return;
+
+	if (direction === "up") {
+		let newList = [];
+		for (let i = 0; i < citiesList.value.length; i++) {
+			if (citiesList.value[i + 1] === city) {
+				newList.push(citiesList.value[i + 1]);
+				newList.push(citiesList.value[i]);
+				i++;
+			} else {
+				newList.push(citiesList.value[i]);
+			}
+		}
+		citiesList.changeValue(newList);
+	} else if (direction === "top") {
+		citiesList.changeValue([city, ...citiesList.value.toSpliced(index, 1)]);
+	}
+};
+
 export const fetchNewCity = async (newCity) => {
 	if (!newCity) return inputStatus.changeValue("emptyInput");
 	inputStatus.changeValue("loading");
