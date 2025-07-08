@@ -1,5 +1,5 @@
 import React from "react";
-import WeeklyDiagram from "./WeeklyDiagram";
+import Diagram from "../Diagram";
 import DetailsCard from "../../DetailsCard";
 
 export default function WeeklyTemperature({ data }) {
@@ -13,7 +13,7 @@ export default function WeeklyTemperature({ data }) {
 
 	return (
 		<DetailsCard title={"Weeekly Temperature"} desc={data.current.last_updated} className={"col-span-5"}>
-			<WeeklyDiagram forecasts={filteredForecast} />
+			<Diagram forecasts={filteredForecast} density={2} />
 		</DetailsCard>
 	);
 }

@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
-import { nightMode } from "../../../../global/citiesData";
-import useSignaledValue from "../../../../hooks/useSignaledValue";
+import React, { useRef } from "react";
+import { nightMode } from "../../../global/citiesData";
+import useSignaledValue from "../../../hooks/useSignaledValue";
 import DiagramTooltip from "./DiagramTooltip";
-import clamp from "../../../../utils/clamp";
+import clamp from "../../../utils/clamp";
 
 const diagram = {
 	width: 1100,
@@ -10,7 +10,7 @@ const diagram = {
 	pointsString: "",
 };
 
-export default function WeekylDiagram({ forecasts }) {
+export default function WeekylDiagram({ forecasts, density = 1 }) {
 	const tooltipRef = useRef();
 	// diagram.width = document.
 	const isNightMode = useSignaledValue(nightMode, "dailyDiagram");
@@ -23,7 +23,7 @@ export default function WeekylDiagram({ forecasts }) {
 
 	diagram.pointsString = "";
 
-	const POINT_DISTANCE = diagram.width / forecasts.length;
+	const POINT_DISTANCE = diagram.width / (forecasts.length - 1);
 
 	const positions = hourlyTemperatures.map((temp, index) => [
 		Math.round(POINT_DISTANCE * index),
@@ -54,7 +54,7 @@ export default function WeekylDiagram({ forecasts }) {
 		tooltipRef.current.style.transform = `translate(${newPos[0]}px, ${newPos[1]}px)`;
 	};
 
-	const hideTooltip = (e) => {
+	const hideTooltip = () => {
 		tooltipRef.current.hidden = true;
 	};
 
@@ -82,7 +82,7 @@ export default function WeekylDiagram({ forecasts }) {
 							<text
 								className="fill-primary stroke-primary"
 								key={"dayText" + index}
-								x={(diagram.width / forecasts.length) * index + 20}
+								x={POINT_DISTANCE * index + 20}
 								y={-diagram.height + 50}
 								fontSize="30"
 							>
@@ -91,10 +91,10 @@ export default function WeekylDiagram({ forecasts }) {
 							<line
 								key={forecast.time + "Line"}
 								className="stroke-night-primary"
-								x1={(diagram.width / forecasts.length) * index}
+								x1={POINT_DISTANCE * index}
 								y1="20"
 								z={-10}
-								x2={(diagram.width / forecasts.length) * index}
+								x2={POINT_DISTANCE * index}
 								y2={-diagram.height + 50}
 								strokeWidth={2}
 							/>
@@ -109,7 +109,7 @@ export default function WeekylDiagram({ forecasts }) {
 				></path>
 				{positions.map(
 					(pos, index) =>
-						index % 2 === 0 && (
+						index % density === 0 && (
 							<circle
 								data-index={index}
 								key={pos[0] + "Circle"}

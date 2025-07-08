@@ -3,8 +3,10 @@ import WEATHER_API_KEY from "../constants/keys.js/";
 import { citiesData, citiesList } from "../global/citiesData";
 
 const INTERVAL = 300000; // refresh interwall (base : 300000)
+
 export default function useWeeklyForecast(city) {
 	const [data, setData] = useState();
+
 	useEffect(() => {
 		function fetchData() {
 			if (city !== new URLSearchParams(location.search).get("city")) return;
@@ -19,7 +21,7 @@ export default function useWeeklyForecast(city) {
 		let ready = false;
 
 		// fetch data if not fetching/fetched it already -- FREE version of API supports only 3 days
-		if (citiesData[city]?.forecast?.forecastday.length < 3) {
+		if (!citiesData[city] || citiesData[city]?.forecast?.forecastday.length < 3) {
 			if (!ready) fetchData();
 		} else {
 			if (new Date() - new Date(citiesData[city]?.current?.last_updated) > INTERVAL) {

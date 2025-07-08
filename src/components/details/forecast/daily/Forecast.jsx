@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from "react";
 import HourlyForecast from "./HourlyForecast";
 import ScrollButton from "./ScrollButton";
 import DetailsCard from "../../DetailsCard";
-import DailyDiagram from "./DailyDiagram";
+
+import Diagram from "../Diagram";
 // 41.67
 const SCROLL_SPEED = 3;
 
@@ -31,10 +32,7 @@ export default function Forecast({ forecast, time }) {
 
 	return (
 		<DetailsCard title={"Daily Forecast"} desc={time} className={"col-span-5 justify-self-center"}>
-			<div
-				onWheel={handleScroll}
-				className="min-w-[240px] max-w-[960px] flex flex-row  gap-10 py-10 items-center"
-			>
+			<div onWheel={handleScroll} className="min-w-[240px] max-w-[960px] flex flex-row  gap-10 py-10 items-center">
 				<ScrollButton scrollInDirection={scrollInDirection} />
 				<div
 					ref={scrollContainer}
@@ -46,8 +44,7 @@ export default function Forecast({ forecast, time }) {
 				</div>
 				<ScrollButton direction={1} scrollInDirection={scrollInDirection} />
 			</div>
-
-			<DailyDiagram forecasts={hourlyForecasts} />
+			<Diagram forecasts={hourlyForecasts} />
 		</DetailsCard>
 	);
 }
