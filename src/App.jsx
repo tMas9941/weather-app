@@ -18,6 +18,7 @@ function App() {
 					<Route path="daily" element={<DailyForecastPage />} />
 					<Route path="weekly" element={<WeeklyForecastPage />} />
 				</Route>
+				<Route path="*" element={<Navigate to={`/daily?city=${citiesList.value[0]}`} />} />
 			</Routes>
 		</Router>
 	);

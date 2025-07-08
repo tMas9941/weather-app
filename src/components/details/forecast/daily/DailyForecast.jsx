@@ -4,10 +4,10 @@ import Wind from "../../wind/Wind";
 import Humidity from "../../Humidity";
 import Location from "../../Location";
 import Forecast from "./Forecast";
+import CityNotFound from "../CityNotFound";
 
 export default function DailyForecast({ details }) {
-	if (!details) return <></>;
-
+	if (!details) return <CityNotFound />;
 	return (
 		<div className="w-full grid grid-cols-5 gap-10 pe-20 ">
 			<Location details={details} />

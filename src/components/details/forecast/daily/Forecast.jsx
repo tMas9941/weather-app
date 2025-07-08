@@ -3,7 +3,7 @@ import HourlyForecast from "./HourlyForecast";
 import ScrollButton from "./ScrollButton";
 import DetailsCard from "../../DetailsCard";
 
-import Diagram from "../Diagram";
+import Diagram from "../diagram/Diagram";
 // 41.67
 const SCROLL_SPEED = 3;
 

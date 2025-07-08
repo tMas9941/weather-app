@@ -1,5 +1,5 @@
 import React from "react";
-import Diagram from "../Diagram";
+import Diagram from "../diagram/Diagram";
 import DetailsCard from "../../DetailsCard";
 
 export default function WeeklyTemperature({ data }) {

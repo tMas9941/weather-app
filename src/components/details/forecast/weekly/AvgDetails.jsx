@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import DetailsCard from "../../DetailsCard";
 
 export default function AvgDetails({ data }) {

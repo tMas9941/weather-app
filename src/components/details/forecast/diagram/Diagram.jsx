@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
-import { nightMode } from "../../../global/citiesData";
-import useSignaledValue from "../../../hooks/useSignaledValue";
+import { nightMode } from "../../../../global/citiesData";
+import useSignaledValue from "../../../../hooks/useSignaledValue";
 import DiagramTooltip from "./DiagramTooltip";
-import clamp from "../../../utils/clamp";
+import clamp from "../../../../utils/clamp";
+import DiagramIcon from "./DiagramIcon";
 
 const diagram = {
 	width: 1100,
@@ -57,7 +58,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 	const hideTooltip = () => {
 		tooltipRef.current.hidden = true;
 	};
-
+	console.log(forecasts);
 	return (
 		<>
 			<DiagramTooltip ref={tooltipRef} isNightMode={isNightMode} />
@@ -126,11 +127,12 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 				)}
 			</svg>
 			<div className={`top-0 flex w-[${diagram.width}px] justify-between -gap-2`}>
+				<DiagramIcon icon={forecasts[0].condition.icon} title={forecasts[0].condition.text} />
 				{forecasts.map(
 					(forecast, index) =>
-						index % 2 === 0 &&
-						forecast.condition.icon !== forecasts[Math.max(0, index - 2)].condition.icon && (
-							<img src={forecast.condition.icon} className="w-[50px] h-[50px] opacity-80" />
+						index % density === 0 &&
+						forecast.condition.icon !== forecasts[Math.max(0, index - density)].condition.icon && (
+							<DiagramIcon icon={forecast.condition.icon} title={forecast.condition.text} />
 						)
 				)}
 			</div>
