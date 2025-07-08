@@ -9,6 +9,7 @@ const diagram = {
 	width: 1100,
 	height: 300,
 	pointsString: "",
+	iconSize: 80,
 };
 
 export default function WeekylDiagram({ forecasts, density = 1 }) {
@@ -67,47 +68,65 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 				className={`${isNightMode ? "stroke-night-accent fill-night-accent/40" : "stroke-accent fill-accent/40"}`}
 				width={diagram.width}
 				height={diagram.height}
-				viewBox={`0 -${diagram.height - 5} ${diagram.width} ${diagram.height + 10}`}
+				viewBox={`-10 -${diagram.height - 20} ${diagram.width + 20} ${diagram.height}`}
 				aria-hidden="true"
 				role="img"
 			>
-				{/* graph */}
-				{new Date(forecasts[0].time).getHours() < 21 && (
+				{/* DRAW graph */}
+				{new Date(forecasts[0].time).getHours() < 22 && (
 					<text className="fill-primary stroke-primary" key={"today"} x={0} y={-diagram.height + 50} fontSize="30">
 						{"Today"}
 					</text>
 				)}
-				{forecasts.map((forecast, index) =>
-					new Date(forecast.time).getHours() === 0 ? (
-						<>
-							<text
-								className="fill-primary stroke-primary"
-								key={"dayText" + index}
-								x={POINT_DISTANCE * index + 20}
-								y={-diagram.height + 50}
-								fontSize="30"
-							>
-								{index < 23 ? "Tomorrow" : forecasts[index + 1].time.substr(5, 5)}
-							</text>
-							<line
-								key={forecast.time + "Line"}
-								className="stroke-night-primary"
-								x1={POINT_DISTANCE * index}
-								y1="20"
-								z={-10}
-								x2={POINT_DISTANCE * index}
-								y2={-diagram.height + 50}
-								strokeWidth={2}
-							/>
-						</>
-					) : (
-						<></>
-					)
-				)}
+				{/* DRAW day separating lines and text */}
+				{forecasts.map((forecast, index) => {
+					const forecastHour = new Date(forecast.time).getHours();
+					if (forecastHour === 0 && index > 0) {
+						return (
+							<>
+								<text
+									className="fill-primary stroke-primary"
+									key={"dayText" + index}
+									x={POINT_DISTANCE * index + 20}
+									y={-diagram.height + 50}
+									fontSize="30"
+								>
+									{index < 23 ? "Tomorrow" : forecasts[Math.min(index + 1, forecasts.length - 1)].time.substr(5, 5)}
+								</text>
+								<line
+									key={forecast.time + "Line"}
+									className="stroke-night-primary"
+									x1={POINT_DISTANCE * index}
+									y1="20"
+									z={-10}
+									x2={POINT_DISTANCE * index}
+									y2={-diagram.height + 50}
+									strokeWidth={2}
+								/>
+							</>
+						);
+					} else if (forecastHour === 12) {
+						return (
+							<>
+								<line
+									key={forecast.time + "Line"}
+									className="stroke-night-primary"
+									x1={POINT_DISTANCE * index}
+									y1="20"
+									z={-10}
+									x2={POINT_DISTANCE * index}
+									y2={-diagram.height + 70}
+									strokeWidth={0.5}
+								/>
+							</>
+						);
+					}
+				})}
 				<path
 					d={`M0 ${diagram.height} ${diagram.pointsString} L${diagram.width} ${diagram.height} Z`}
 					strokeWidth={3}
 				></path>
+				{/* DRAW temperature points */}
 				{positions.map(
 					(pos, index) =>
 						index % density === 0 && (
@@ -126,16 +145,38 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 						)
 				)}
 			</svg>
-			<div className={` flex w-[${diagram.width}px] justify-between -gap-2`}>
-				<DiagramIcon icon={forecasts[0].condition.icon} title={forecasts[0].condition.text} />
-				{forecasts.map(
-					(forecast, index) =>
+			{/* DRAW icons */}
+			<div className={`relative h-10 w-[${diagram.width}px] -gap-2`}>
+				<DiagramIcon
+					icon={forecasts[0].condition.icon}
+					title={forecasts[0].condition.text}
+					size={diagram.iconSize}
+					xPos={positions[0][0] * (1 - 20 / diagram.width) + 20}
+				/>
+				{forecasts.map((forecast, index) => {
+					if (
 						index % density === 0 &&
-						forecast.condition.icon !== forecasts[Math.max(0, index - density)].condition.icon && (
-							<DiagramIcon icon={forecast.condition.icon} title={forecast.condition.text} />
-						)
-				)}
-				<DiagramIcon icon={forecasts[0].condition.icon} title={forecasts[forecasts.length - 1].condition.text} />
+						forecast.condition.icon !== forecasts[Math.max(0, index - density)].condition.icon
+					) {
+						return (
+							<DiagramIcon
+								icon={forecast.condition.icon}
+								title={forecast.condition.text}
+								size={diagram.iconSize}
+								xPos={positions[index][0] * (1 - 20 / diagram.width) + 20}
+							/>
+						);
+					} else if (index === forecasts.length - 1) {
+						return (
+							<DiagramIcon
+								icon={forecasts[forecasts.length - 1].condition.icon}
+								title={forecasts[forecasts.length - 1].condition.text}
+								size={diagram.iconSize}
+								xPos={positions[forecasts.length - 1][0] * (1 - 20 / diagram.width) + 20}
+							/>
+						);
+					}
+				})}
 			</div>
 		</>
 	);
