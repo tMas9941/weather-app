@@ -37,6 +37,7 @@ export const MoveCityInList = (city, direction) => {
 	} else if (direction === "top") {
 		citiesList.changeValue([city, ...citiesList.value.toSpliced(index, 1)]);
 	}
+	localStorage.setItem("cities", citiesList.value);
 };
 
 export const fetchNewCity = async (newCity) => {

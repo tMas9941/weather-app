@@ -12,7 +12,7 @@ const diagram = {
 	iconSize: 80,
 };
 
-export default function WeekylDiagram({ forecasts, density = 1 }) {
+export default function Diagram({ forecasts, density = 1 }) {
 	const tooltipRef = useRef();
 
 	const isNightMode = useSignaledValue(nightMode, "dailyDiagram");
@@ -74,7 +74,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 			>
 				{/* DRAW graph */}
 				{new Date(forecasts[0].time).getHours() < 22 && (
-					<text className="fill-primary stroke-primary" key={"today"} x={0} y={-diagram.height + 50} fontSize="30">
+					<text className="fill-primary stroke-primary" key={"todayText"} x={0} y={-diagram.height + 50} fontSize="30">
 						{"Today"}
 					</text>
 				)}
@@ -83,10 +83,10 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 					const forecastHour = new Date(forecast.time).getHours();
 					if (forecastHour === 0 && index > 0) {
 						return (
-							<>
+							<React.Fragment key={"fragment" + index}>
 								<text
 									className="fill-primary stroke-primary"
-									key={"dayText" + index}
+									key={"DayText" + index}
 									x={POINT_DISTANCE * index + 20}
 									y={-diagram.height + 50}
 									fontSize="30"
@@ -94,7 +94,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 									{index < 23 ? "Tomorrow" : forecasts[Math.min(index + 1, forecasts.length - 1)].time.substr(5, 5)}
 								</text>
 								<line
-									key={forecast.time + "Line"}
+									key={forecast.time + "DiagramDayLine"}
 									className="stroke-night-primary"
 									x1={POINT_DISTANCE * index}
 									y1="20"
@@ -103,22 +103,20 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 									y2={-diagram.height + 50}
 									strokeWidth={2}
 								/>
-							</>
+							</React.Fragment>
 						);
 					} else if (forecastHour === 12) {
 						return (
-							<>
-								<line
-									key={forecast.time + "Line"}
-									className="stroke-night-primary"
-									x1={POINT_DISTANCE * index}
-									y1="20"
-									z={-10}
-									x2={POINT_DISTANCE * index}
-									y2={-diagram.height + 70}
-									strokeWidth={0.5}
-								/>
-							</>
+							<line
+								key={"NoonLine" + index}
+								className="stroke-night-primary"
+								x1={POINT_DISTANCE * index}
+								y1="20"
+								z={-10}
+								x2={POINT_DISTANCE * index}
+								y2={-diagram.height + 70}
+								strokeWidth={0.5}
+							/>
 						);
 					}
 				})}
@@ -132,7 +130,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 						index % density === 0 && (
 							<circle
 								data-index={index}
-								key={pos[0] + "Circle"}
+								key={pos[0] + "DiagramCircle"}
 								id={"wd-circle-" + index}
 								className={`fill-white hover:fill-primary ${isNightMode ? "stroke-night-accent " : "stroke-accent "}`}
 								r="8"
@@ -160,6 +158,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 					) {
 						return (
 							<DiagramIcon
+								key={"DiagramIcon" + index}
 								icon={forecast.condition.icon}
 								title={forecast.condition.text}
 								size={diagram.iconSize}
@@ -169,6 +168,7 @@ export default function WeekylDiagram({ forecasts, density = 1 }) {
 					} else if (index === forecasts.length - 1) {
 						return (
 							<DiagramIcon
+								key={"DiagramIcon" + index}
 								icon={forecasts[forecasts.length - 1].condition.icon}
 								title={forecasts[forecasts.length - 1].condition.text}
 								size={diagram.iconSize}

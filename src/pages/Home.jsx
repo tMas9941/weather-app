@@ -14,8 +14,8 @@ export default function Home() {
 			className={`w-screen min-h-screen overflow-x-auto overflow-y-auto flex flex-row gap-10 
 			 ${
 					isNightMode
-						? "bg-night-background text-night-text stroke-night-text [&_h3]:text-secondary "
-						: "bg-background text-text stroke-text  [&_h3]:text-night-secondary"
+						? "bg-night-background text-night-text stroke-night-text fill-night-text [&_h3]:text-secondary "
+						: "bg-background text-text stroke-text fill-text [&_h3]:text-night-secondary"
 				}`}
 		>
 			<SideBar />
