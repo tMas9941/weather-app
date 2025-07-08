@@ -5,15 +5,14 @@ import DiagramTooltip from "./DiagramTooltip";
 import clamp from "../../../../utils/clamp";
 
 const diagram = {
-	width: 1200,
-	height: 400,
+	width: 1100,
+	height: 300,
 	pointsString: "",
 };
 
 export default function WeekylDiagram({ forecasts }) {
 	const tooltipRef = useRef();
-
-	const POINT_DISTANCE = diagram.width / forecasts.length;
+	// diagram.width = document.
 	const isNightMode = useSignaledValue(nightMode, "dailyDiagram");
 
 	const hourlyTemperatures = forecasts.map((forecast) => forecast.temp_c);
@@ -23,6 +22,9 @@ export default function WeekylDiagram({ forecasts }) {
 	const diff = maxTemp - minTemp + 5;
 
 	diagram.pointsString = "";
+
+	const POINT_DISTANCE = diagram.width / forecasts.length;
+
 	const positions = hourlyTemperatures.map((temp, index) => [
 		Math.round(POINT_DISTANCE * index),
 		Math.round(((temp - minTemp) / diff) * -diagram.height),
@@ -46,7 +48,7 @@ export default function WeekylDiagram({ forecasts }) {
 			clamp(10, diagram.width - tooltipRef.current.clientWidth - 40, e.target.cx.baseVal.value),
 			e.target.cy.baseVal.value + diagram.height - tooltipRef.current.clientHeight - 30,
 		];
-		if (newPos[1] <= 0) newPos[1] += tooltipRef.current.clientHeight + 50;
+		if (newPos[1] <= 30) newPos[1] += tooltipRef.current.clientHeight + 40;
 
 		// set new position of tooltip
 		tooltipRef.current.style.transform = `translate(${newPos[0]}px, ${newPos[1]}px)`;
@@ -59,11 +61,12 @@ export default function WeekylDiagram({ forecasts }) {
 	return (
 		<>
 			<DiagramTooltip ref={tooltipRef} isNightMode={isNightMode} />
+
 			<svg
 				className={`${isNightMode ? "stroke-night-accent fill-night-accent/40" : "stroke-accent fill-accent/40"}`}
 				width={diagram.width}
 				height={diagram.height}
-				viewBox={`-10 -${diagram.height - 5} ${diagram.width + 20} ${diagram.height + 10}`}
+				viewBox={`0 -${diagram.height - 5} ${diagram.width} ${diagram.height + 10}`}
 				aria-hidden="true"
 				role="img"
 			>
@@ -78,7 +81,7 @@ export default function WeekylDiagram({ forecasts }) {
 						<>
 							<text
 								className="fill-primary stroke-primary"
-								key={"today"}
+								key={"dayText" + index}
 								x={(diagram.width / forecasts.length) * index + 20}
 								y={-diagram.height + 50}
 								fontSize="30"
@@ -91,7 +94,6 @@ export default function WeekylDiagram({ forecasts }) {
 								x1={(diagram.width / forecasts.length) * index}
 								y1="20"
 								z={-10}
-								// x2={(diagram.width / 24) * index}
 								x2={(diagram.width / forecasts.length) * index}
 								y2={-diagram.height + 50}
 								strokeWidth={2}
@@ -123,6 +125,15 @@ export default function WeekylDiagram({ forecasts }) {
 						)
 				)}
 			</svg>
+			<div className={`top-0 flex w-[${diagram.width}px] justify-between -gap-2`}>
+				{forecasts.map(
+					(forecast, index) =>
+						index % 2 === 0 &&
+						forecast.condition.icon !== forecasts[Math.max(0, index - 2)].condition.icon && (
+							<img src={forecast.condition.icon} className="w-[50px] h-[50px] opacity-80" />
+						)
+				)}
+			</div>
 		</>
 	);
 }

@@ -12,7 +12,7 @@ export default function WeeklyTemperature({ data }) {
 	// .filter((forecast, index) => (index % 2 === 0 || index === 0) && forecast);
 
 	return (
-		<DetailsCard title={"Weeekly Temperature"} desc={data.current.last_updated} className={"col-span-5 w-full"}>
+		<DetailsCard title={"Weeekly Temperature"} desc={data.current.last_updated} className={"col-span-5"}>
 			<WeeklyDiagram forecasts={filteredForecast} />
 		</DetailsCard>
 	);
