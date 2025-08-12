@@ -11,7 +11,7 @@ export default function Home() {
 
 	return (
 		<div
-			className={`w-screen min-h-screen overflow-x-auto overflow-y-auto flex flex-row gap-10 
+			className={`w-full min-h-screen overflow-x-auto overflow-y-auto flex flex-row gap-10 
 			 ${
 					isNightMode
 						? "bg-night-background text-night-text stroke-night-text fill-night-text [&_h3]:text-secondary "
@@ -19,7 +19,7 @@ export default function Home() {
 				}`}
 		>
 			<SideBar />
-			<div className={`w-[1200px] pb-10 flex flex-col ${isNightMode ? "bg-background/10" : "bg-night-background/5"}`}>
+			<div className={`w-[1200px]  pb-10 flex flex-col ${isNightMode ? "bg-background/10" : "bg-night-background/5"} `}>
 				<Outlet />
 			</div>
 		</div>

@@ -16,7 +16,7 @@ export default function List() {
 		(newCity) => {
 			setSearchParams({ city: newCity });
 		},
-		[window.location.pathname]
+		[setSearchParams]
 	);
 
 	if (!cities) return <></>;

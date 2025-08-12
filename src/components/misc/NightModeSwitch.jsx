@@ -5,7 +5,7 @@ export default function NightModeSwitch({ isNightMode, scale = 0.8 }) {
 		<button
 			style={{ scale: scale }}
 			onClick={() => changeNightMode(!isNightMode)}
-			className={`w-20 h-10 [&,&_*]:rounded-full p-1 cursor-pointer outline-3 hover:brightness-120 ${
+			className={`w-20 min-w-20 h-10 [&,&_*]:rounded-full p-1 cursor-pointer outline-3 hover:brightness-120 ${
 				isNightMode ? "bg-sky-900 outline-white" : "bg-sky-400 outline-sky-900 "
 			} [&,&_*]:transition-[color, transform] [&_*]:duration-200 `}
 			title="Toggle between night/day mode"

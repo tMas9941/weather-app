@@ -13,18 +13,21 @@ export default function Header() {
 
 	return (
 		<nav
-			className={`p-1 flex justify-between ${
+			className={` p-1 flex justify-between  ${
 				isNightMode
 					? "bg-night-background border-night-text/20 text-night-text"
 					: "bg-background/10 text-text border-text/20"
-			} border-b-1 `}
+			} border-b-1 [&>*]:basis-[33%]`}
 		>
 			<InputBar isNightMode={isNightMode} />
-			<div className="absolute flex gap-10 w-full mx-auto justify-center">
+
+			<div className="flex justify-center gap-10">
 				<HeaderButton text={"today"} path={"daily"} params={{ searchParams, setSearchParams }} />
 				<HeaderButton text={"weekly"} path={"weekly"} params={{ searchParams, setSearchParams }} />
 			</div>
-			<NightModeSwitch isNightMode={isNightMode} />
+			<div className="flex justify-end">
+				<NightModeSwitch isNightMode={isNightMode} />
+			</div>
 		</nav>
 	);
 }

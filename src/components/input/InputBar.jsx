@@ -26,7 +26,7 @@ export default function InputBar({ isNightMode }) {
 	};
 
 	return (
-		<div className="h-10 w-fit px-3 flex flex-col">
+		<div className="h-10 min-w-5 max-w-[450px] px-3 flex flex-col">
 			<form
 				style={{ direction: "ltr" }}
 				onSubmit={handleSubmit}
