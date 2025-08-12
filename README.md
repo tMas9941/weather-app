@@ -1,12 +1,43 @@
-# React + Vite
+# Weather App
+[Description](#description)
+[Requirements](#requirements)
+[Installation](#installation)
+[Usage](#usage)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+This is a simple app where the user can get some information about weather iformations about cities around the world.
+The userdata is stored in localstorage. (selected cities, starting city, day/nightmode)
+Used API: https://www.weatherapi.com/
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requirements
+-npm v10 or higher
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Installation
+### Clone the repository
+```bash
+git clone https://github.com/tMas9941/weather-app.git
+cd weather-app
+```
+
+### Install dependencies and start the project
+```bash
+npm install
+npm run build
+npm run preview
+ ```
+
+## Usage
+
+-Add cities to follow:
+<img width="1920" height="955" alt="wa-today-1" src="https://github.com/user-attachments/assets/7bd3448a-0723-44f2-a82a-a9f320f284fb" />
+<img width="1920" height="963" alt="wa-today-2" src="https://github.com/user-attachments/assets/6ab32e5a-9627-452b-976c-d56ce9e6698d" />
+
+-Change between daily or weekly forecast: 
+(The free weatherapi supports only 3 days...)
+<img width="1920" height="956" alt="wa-weekly" src="https://github.com/user-attachments/assets/d73567a7-2129-4d09-95c9-3678cae010a2" />
+
+-Toggled day mode
+<img width="1920" height="958" alt="wa-daymode" src="https://github.com/user-attachments/assets/fc4625bb-21ee-4400-859c-63b327bd8206" />
