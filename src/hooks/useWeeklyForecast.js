@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import WEATHER_API_KEY from "../constants/keys.js/";
 import { citiesData, citiesList } from "../global/citiesData";
 
-const INTERVAL = 300000; // refresh interwall (base : 300000)
+const INTERVAL = 300000; // refresh intervall (base : 300000)
 
 export default function useWeeklyForecast(city) {
 	const [data, setData] = useState();
