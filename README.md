@@ -17,13 +17,17 @@ Used API: https://www.weatherapi.com/
 
 ## Installation
 ### Clone the repository
+```bash
 git clone https://github.com/tMas9941/weather-app.git
 cd weather-app
+```
 
 ### Install dependencies and start the project
+```bash
 npm install
 npm run build
 npm run preview
+ ```
 
 ## Usage
 
