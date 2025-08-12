@@ -11,9 +11,13 @@ Used API: https://www.weatherapi.com/
 
 
 ## Requirements
+-Node.js v19 or higher
 -npm v10 or higher
+-browser that supports JavaScript
 
-
+### Built With:
+-React.js
+-Tailwind
 
 ## Installation
 ### Clone the repository
@@ -39,5 +43,5 @@ npm run preview
 (The free weatherapi supports only 3 days...)
 <img width="1920" height="956" alt="wa-weekly" src="https://github.com/user-attachments/assets/d73567a7-2129-4d09-95c9-3678cae010a2" />
 
--Toggled day mode
+-Toggled day mode:
 <img width="1920" height="958" alt="wa-daymode" src="https://github.com/user-attachments/assets/fc4625bb-21ee-4400-859c-63b327bd8206" />
