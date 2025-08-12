@@ -1,3 +1,3 @@
-const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY || "0d3b193367404923a1a153418242609";
 
 export default WEATHER_API_KEY;
